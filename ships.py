@@ -13,6 +13,11 @@ def get_appraisal():
     appraisal_url = 'https://www.evepraisal.com/a/{}.json'.format(appraisal_id)
     result = requests.get(appraisal_url).json()
 
+
+    ## Notes and code that will help
+    # convert = str(result).replace('\'', '"')
+    result['items'][0]['prices']
+
     return(result)
 
 def main():
