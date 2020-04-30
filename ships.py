@@ -22,7 +22,14 @@ marketList = [
 
 def welcome():
     print('Hello and Welcome to Jeklah\'s Ship Cost Calculator')
+    print('Please choose which market you would like to use: ')
+    for market in marketList:
+        print('Ξ ' + marketList.index(market) + ' ' + market + '\n')
 
+def choose_market():
+    marketChoice = raw_input('Your choice by number: ')
+
+    return(marketChoice)
 
 def get_appraisal(ore, market):
     url = 'https://www.evepraisal.com/appraisal'
@@ -38,18 +45,19 @@ def get_appraisal(ore, market):
 
     ## Notes and code that will help
     #
-    #convert = str(result).replace('\'', '"')
+    # convert = str(result).replace('\'', '"')
+    # result['items'][0]['prices']
+    # prices = result['items'][0]['prices']['buy']
+    # quantity = result['items'][0]['quantity']
 
-    result['items'][0]['prices']
     oreName = result['items'][0]['name']
-    quantity = result['items'][0]['quantity']
-    prices = result['items'][0]['prices']['buy']
     currAvg = result['items'][0]['prices']['buy']['avg']
     minPrice = result['items'][0]['prices']['buy']['min']
     maxPrice = result['items'][0]['prices']['buy']['max']
 
 
-    return(result)
+    return(oreName, currAvg, minPrice, maxPrice)
+
 
 def main():
     ret = get_appraisal()
