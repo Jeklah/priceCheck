@@ -67,7 +67,7 @@ def get_appraisal(item, market):
     return(itemName, currAvg, minPrice, maxPrice)
 
 def ship_parts():
-
+    print()
 
 def main():
     ret = get_appraisal()
