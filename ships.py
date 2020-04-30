@@ -58,6 +58,7 @@ def get_appraisal(ore, market):
 
     return(oreName, currAvg, minPrice, maxPrice)
 
+def ship_parts
 
 def main():
     ret = get_appraisal()
