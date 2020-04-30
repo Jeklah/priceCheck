@@ -41,17 +41,16 @@ def choose_market():
 
     return(marketChoice)
 
-def get_appraisal(ore, market):
+def get_appraisal(item, market):
     url = 'https://www.evepraisal.com/appraisal'
     payload = {
-        'raw_textarea': ore + ' 1',
+        'raw_textarea': item + ' 1',
         'market': market
     }
     req = requests.post(url, params=payload)
     appraisal_id = req.headers['X-Appraisal-Id']
     appraisal_url = 'https://www.evepraisal.com/a/{}.json'.format(appraisal_id)
     result = requests.get(appraisal_url).json()
-
 
     ## Notes and code that will help
     #
@@ -60,13 +59,12 @@ def get_appraisal(ore, market):
     # prices = result['items'][0]['prices']['buy']
     # quantity = result['items'][0]['quantity']
 
-    oreName = result['items'][0]['name']
+    itemName = result['items'][0]['name']
     currAvg = result['items'][0]['prices']['buy']['avg']
     minPrice = result['items'][0]['prices']['buy']['min']
     maxPrice = result['items'][0]['prices']['buy']['max']
 
-
-    return(oreName, currAvg, minPrice, maxPrice)
+    return(itemName, currAvg, minPrice, maxPrice)
 
 def ship_parts():
 
