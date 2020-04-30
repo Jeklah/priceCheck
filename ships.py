@@ -39,7 +39,7 @@ def welcome():
 def choose_market():
     marketChoice = raw_input('Your choice by number: ')
 
-    return(marketChoice)
+    return(marketList[marketChoice])
 
 def get_appraisal(item, market):
     url = 'https://www.evepraisal.com/appraisal'
