@@ -15,8 +15,18 @@ def get_appraisal():
 
 
     ## Notes and code that will help
-    # convert = str(result).replace('\'', '"')
+    #
+    #convert = str(result).replace('\'', '"')
+    #
+    # THESE ARE NOT BUY PRICES THEY ARE ALL. CHANGE.
+
     result['items'][0]['prices']
+    tritName = result['items'][0]['name']
+    quantity = result['items'][0]['quantity']
+    prices = result['items'][0]['prices']['all']
+    currAvg = result['items'][0]['prices']['all']['median']
+    minPrice = result['items'][0]['prices']['all']['min']
+    orderCount = result['items'][0]['prices']['all']['order_count']
 
     return(result)
 
