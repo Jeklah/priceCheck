@@ -20,6 +20,16 @@ marketList = [
                 'dodixie'
               ]
 
+partsList = [
+                'Capital Capacitor Battery',
+                'Capital Cargo Bar',
+                'Capital Computer Sytem',
+                'Capital Construction Parts',
+                'Capital Corporate Hanger Bay',
+                'Capital Sensor Cluster',
+                'Capital Ship Maintenance Bay'
+            ]
+
 def welcome():
     print('Hello and Welcome to Jeklah\'s Ship Cost Calculator')
     print('Please choose which market you would like to use: ')
@@ -58,7 +68,8 @@ def get_appraisal(ore, market):
 
     return(oreName, currAvg, minPrice, maxPrice)
 
-def ship_parts
+def ship_parts():
+
 
 def main():
     ret = get_appraisal()
