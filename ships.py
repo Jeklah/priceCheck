@@ -2,11 +2,33 @@ import click
 import requests
 from requests.structures import CaseInsensitiveDict
 
-def get_appraisal():
+oreList = [
+            'Tritanium',
+            'Pyerite',
+            'Isogen',
+            'Megacyte',
+            'Mexallon',
+            'Nocxium',
+            'Zydrine'
+           ]
+
+marketList = [
+                'jita',
+                'hek',
+                'amarr',
+                'rens',
+                'dodixie'
+              ]
+
+def welcome():
+    print('Hello and Welcome to Jeklah\'s Ship Cost Calculator')
+
+
+def get_appraisal(ore, market):
     url = 'https://www.evepraisal.com/appraisal'
     payload = {
-        'raw_textarea': 'Tritanium 1',
-        'market': 'jita',
+        'raw_textarea': ore + ' 1',
+        'market': market
     }
     req = requests.post(url, params=payload)
     appraisal_id = req.headers['X-Appraisal-Id']
@@ -17,16 +39,15 @@ def get_appraisal():
     ## Notes and code that will help
     #
     #convert = str(result).replace('\'', '"')
-    #
-    # THESE ARE NOT BUY PRICES THEY ARE ALL. CHANGE.
 
     result['items'][0]['prices']
-    tritName = result['items'][0]['name']
+    oreName = result['items'][0]['name']
     quantity = result['items'][0]['quantity']
-    prices = result['items'][0]['prices']['all']
-    currAvg = result['items'][0]['prices']['all']['median']
-    minPrice = result['items'][0]['prices']['all']['min']
-    orderCount = result['items'][0]['prices']['all']['order_count']
+    prices = result['items'][0]['prices']['buy']
+    currAvg = result['items'][0]['prices']['buy']['avg']
+    minPrice = result['items'][0]['prices']['buy']['min']
+    maxPrice = result['items'][0]['prices']['buy']['max']
+
 
     return(result)
 
