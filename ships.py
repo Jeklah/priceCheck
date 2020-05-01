@@ -37,7 +37,7 @@ def welcome():
         print('Ξ ' + marketList.index(market) + ' ' + market + '\n')
 
 def choose_market():
-    marketChoice = raw_input('Your choice by number: ')
+    marketChoice = input('Your choice by number: ')
 
     return(marketList[marketChoice])
 
@@ -75,5 +75,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
