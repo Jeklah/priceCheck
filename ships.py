@@ -3,6 +3,7 @@ import json
 import requests
 from requests.structures import CaseInsensitiveDict
 
+components = []
 oreList = [
             'Tritanium',
             'Pyerite',
@@ -31,16 +32,17 @@ partsList = [
                 'Capital Ship Maintenance Bay'
             ]
 
-shipPartCounts = [
-                    ['Orca',
-                    '9',
-                    '35',
-                    '7',
-                    '15',
-                    '4',
-                    '4',
-                    '7']
-                 ]
+shipPartCounts = {
+                    'Orca':{
+                        '9',
+                        '35',
+                        '7',
+                        '15',
+                        '4',
+                        '4',
+                        '7'
+                    }
+                 }
 
 def welcome():
     print('Hello and Welcome to Jeklah\'s Ship Cost Calculator')
@@ -78,10 +80,23 @@ def get_appraisal(item, market):
 
     return(itemName, currAvg, minPrice, maxPrice)
 
-def ship_parts():
-    print()
+def ship_parts_cost(market):
+    partCount = dict(zip(partsList, shipPartCounts['Orca']))
+    total = 0
+
+    for part in partCount:
+        partDetails = get_appraisal(part, market)
+        partCost = partDetails[1] * partCount[part]
+        total += partCost
+        print('- ' + part + 'x' + partCount[part] + ' costs: ' + partCost + ' ISK')
+
+    print('Total cost of parts = ' + total)
+
+    return(total)
+
 
 def main():
+    market = choose_market()
     ret = get_appraisal()
     print(ret)
 
