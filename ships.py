@@ -22,8 +22,8 @@ marketList = [
 
 partsList = [
                 'Capital Capacitor Battery',
-                'Capital Cargo Bar',
-                'Capital Computer Sytem',
+                'Capital Cargo Bay',
+                'Capital Computer System',
                 'Capital Construction Parts',
                 'Capital Corporate Hanger Bay',
                 'Capital Sensor Cluster',
