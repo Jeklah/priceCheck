@@ -1,5 +1,4 @@
 import click
-import json
 import requests
 from requests.structures import CaseInsensitiveDict
 
@@ -96,7 +95,9 @@ def ship_parts_cost(market):
 
 
 def main():
+    welcome()
     market = choose_market()
+    ship_parts_cost(market)
     ret = get_appraisal()
     print(ret)
 
