@@ -1,4 +1,5 @@
 import click
+import json
 import requests
 from requests.structures import CaseInsensitiveDict
 
@@ -29,6 +30,17 @@ partsList = [
                 'Capital Sensor Cluster',
                 'Capital Ship Maintenance Bay'
             ]
+
+shipPartCounts = [
+                    ['Orca',
+                    '9',
+                    '35',
+                    '7',
+                    '15',
+                    '4',
+                    '4',
+                    '7']
+                 ]
 
 def welcome():
     print('Hello and Welcome to Jeklah\'s Ship Cost Calculator')
