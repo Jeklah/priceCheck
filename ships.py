@@ -47,12 +47,12 @@ def welcome():
     print('Hello and Welcome to Jeklah\'s Ship Cost Calculator')
     print('Please choose which market you would like to use: ')
     for market in marketList:
-        print('Ξ ' + marketList.index(market) + ' ' + market + '\n')
+        print('Ξ ' + str(marketList.index(market)) + ' ' + market + '\n')
 
 def choose_market():
     marketChoice = input('Your choice by number: ')
 
-    return(marketList[marketChoice])
+    return(marketChoice)
 
 def get_appraisal(item, market):
     url = 'https://www.evepraisal.com/appraisal'
@@ -61,6 +61,8 @@ def get_appraisal(item, market):
         'market': market
     }
     req = requests.post(url, params=payload)
+    print(item)
+    print('hitting it')
     appraisal_id = req.headers['X-Appraisal-Id']
     appraisal_url = 'https://www.evepraisal.com/a/{}.json'.format(appraisal_id)
     result = requests.get(appraisal_url).json()
@@ -83,11 +85,11 @@ def ship_parts_cost(market):
     partCount = dict(zip(partsList, shipPartCounts['Orca']))
     total = 0
 
-    for part in partCount:
-        partDetails = get_appraisal(part, market)
-        partCost = partDetails[1] * partCount[part]
+    for item in partCount:
+        partDetails = get_appraisal(item, market)
+        partCost = partDetails[1] * partCount[item]
         total += partCost
-        print('- ' + part + 'x' + partCount[part] + ' costs: ' + partCost + ' ISK')
+        print('- ' + item + 'x' + partCount[item] + ' costs: ' + partCost + ' ISK')
 
     print('Total cost of parts = ' + total)
 
@@ -98,8 +100,6 @@ def main():
     welcome()
     market = choose_market()
     ship_parts_cost(market)
-    ret = get_appraisal()
-    print(ret)
 
 if __name__ == "__main__":
     main()
