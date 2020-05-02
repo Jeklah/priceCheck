@@ -46,19 +46,19 @@ shipPartCounts = {
 def welcome():
     print('Hello and Welcome to Jeklah\'s Ship Cost Calculator')
     print('Please choose which market you would like to use: ')
-    for market in marketList:
-        print('Ξ ' + str(marketList.index(market)) + ' ' + market + '\n')
+    for mrkt in marketList:
+        print('Ξ ' + str(marketList.index(mrkt)) + ' ' + mrkt + '\n')
 
 def choose_market():
     marketChoice = input('Your choice by number: ')
-
-    return(marketChoice)
+    market = marketList[int(marketChoice)]
+    return(market)
 
 def get_appraisal(item, market):
     url = 'https://www.evepraisal.com/appraisal'
     payload = {
         'raw_textarea': item + ' 1',
-        'market': market
+        'market': market,
     }
     req = requests.post(url, params=payload)
     print(item)
