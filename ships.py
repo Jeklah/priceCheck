@@ -52,6 +52,7 @@ def welcome():
 def choose_market():
     marketChoice = input('Your choice by number: ')
     market = marketList[int(marketChoice)]
+
     return(market)
 
 def get_appraisal(item, market):
