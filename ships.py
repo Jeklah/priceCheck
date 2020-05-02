@@ -2,7 +2,7 @@ import click
 import requests
 from requests.structures import CaseInsensitiveDict
 
-components = []
+partDetails = []
 oreList = [
             'Tritanium',
             'Pyerite',
@@ -80,7 +80,9 @@ def get_appraisal(item, market):
     minPrice = result['items'][0]['prices']['buy']['min']
     maxPrice = result['items'][0]['prices']['buy']['max']
 
-    return(itemName, currAvg, minPrice, maxPrice)
+    partDetails = [itemName, currAvg, minPrice, maxPrice]
+
+    return(partDetails)
 
 def ship_parts_cost(market):
     partCount = dict(zip(partsList, shipPartCounts['Orca']))
