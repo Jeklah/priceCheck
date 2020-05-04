@@ -62,12 +62,12 @@ def get_appraisal(item, market):
         'market': market,
     }
     req = requests.post(url, params=payload)
-    appraisal_id = req.headers['X-Appraisal-Id']
+    appraisal_id  = req.headers['X-Appraisal-Id']
     appraisal_url = 'https://www.evepraisal.com/a/{}.json'.format(appraisal_id)
     result = requests.get(appraisal_url).json()
 
     itemName = result['items'][0]['name']
-    currAvg = result['items'][0]['prices']['sell']['avg']
+    currAvg  = result['items'][0]['prices']['sell']['avg']
     minPrice = result['items'][0]['prices']['sell']['min']
     maxPrice = result['items'][0]['prices']['sell']['max']
 
