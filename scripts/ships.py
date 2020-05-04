@@ -91,7 +91,7 @@ def ship_parts_cost(market):
         partCost = partDetails[1] * float(partCount[item])
         partCost = round(partCost, 2)
         total += partCost
-        print(item + ' costs ' + str(partCost) + ' at ' + market)
+        print(item + ' costs ' + str(round(partDetails[1], 2)) + ' ISK at ' + market)
         print('- ' + item + ' x' + partCount[item] + ' costs: ' + str(partCost) + ' ISK' + '\n')
 
     total = round(total, 2)
