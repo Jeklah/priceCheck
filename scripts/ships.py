@@ -26,7 +26,7 @@ partsList = [
                 'Capital Cargo Bay',
                 'Capital Computer System',
                 'Capital Construction Parts',
-                'Capital Corporate Hanger Bay',
+                'Capital Corporate Hangar Bay',
                 'Capital Sensor Cluster',
                 'Capital Ship Maintenance Bay'
             ]
@@ -90,11 +90,12 @@ def ship_parts_cost(market):
 
     for item in partCount:
         partDetails = get_appraisal(item, market)
-        partCost = partDetails[1] * partCount[item]
+        partCost = partDetails[1] * float(partCount[item])
+        partCost = round(partCost, 2)
         total += partCost
-        print('- ' + item + 'x' + partCount[item] + ' costs: ' + partCost + ' ISK')
+        print('- ' + item + 'x' + partCount[item] + ' costs: ' + str(partCost) + ' ISK')
 
-    print('Total cost of parts = ' + total)
+    print('Total cost of parts = ' + str(total))
 
     return(total)
 
