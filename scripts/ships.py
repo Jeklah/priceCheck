@@ -11,7 +11,7 @@ def welcome():
         print('Ξ ' + str(consts.marketList.index(mrkt)) + ' ' + mrkt.capitalize() + '\n')
 
 def choose_market():
-    marketChoice = input('Your choice by number: ')
+    marketChoice = input('Choose market by number: ')
     market = consts.marketList[int(marketChoice)]
     print('You chose ' + market.capitalize() + '\n')
 
