@@ -10,7 +10,7 @@ Using the Tool
 
 run the script by running the following command
 
-python ships.py
+python scripts/ships.py
 
 
 Notes
