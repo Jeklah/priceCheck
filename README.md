@@ -19,5 +19,7 @@ python executable name may rely on your version installed.
 if python does not work, the following are worth trying:
 
 python3
+
 python3.7
+
 python3.8
