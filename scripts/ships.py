@@ -1,6 +1,5 @@
-import click
+# import click  to be implemented at later date
 import requests
-from requests.structures import CaseInsensitiveDict
 
 partDetails = []
 oreList = [
@@ -45,13 +44,14 @@ shipPartCounts = {
 
 def welcome():
     print('Hello and Welcome to Jeklah\'s Ship Cost Calculator')
-    print('Please choose which market you would like to use: ')
+    print('Please choose which market you would like to use: ' + '\n')
     for mrkt in marketList:
-        print('Ξ ' + str(marketList.index(mrkt)) + ' ' + mrkt + '\n')
+        print('Ξ ' + str(marketList.index(mrkt)) + ' ' + mrkt.capitalize() + '\n')
 
 def choose_market():
     marketChoice = input('Your choice by number: ')
     market = marketList[int(marketChoice)]
+    print('You chose ' + market.capitalize() + '\n')
 
     return(market)
 
@@ -91,14 +91,11 @@ def ship_parts_cost(market):
         partCost = partDetails[1] * float(partCount[item])
         partCost = round(partCost, 2)
         total += partCost
-        print(item + ' costs ' + str(round(partDetails[1], 2)) + ' ISK at ' + market)
-        print('- ' + item + ' x' + partCount[item] + ' costs: ' + str(partCost) + ' ISK' + '\n')
+        print(item + ' costs ' + '{:,}'.format(round(partDetails[1], 2)) + ' ISK at ' + market.capitalize())
+        print('- ' + item + ' x' + partCount[item] + ' costs: ' + '{:,}'.format(partCost) + ' ISK' + '\n')
 
     total = round(total, 2)
-    print('Total cost of parts = ' + str(total))
-
-    # return(total)
-
+    print('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
 
 def main():
     welcome()
