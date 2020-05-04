@@ -66,7 +66,7 @@ def get_appraisal(item, market):
     appraisal_url = 'https://www.evepraisal.com/a/{}.json'.format(appraisal_id)
     result = requests.get(appraisal_url).json()
 
-    ## Notes and code that will help
+    # Notes and code that will help
     #
     # convert = str(result).replace('\'', '"')
     # result['items'][0]['prices']
@@ -91,13 +91,13 @@ def ship_parts_cost(market):
         partCost = partDetails[1] * float(partCount[item])
         partCost = round(partCost, 2)
         total += partCost
-        print(item + ' costs ' + str(partDetails[1]))
-        print('- ' + item + ' x' + partCount[item] + ' costs: ' + str(partCost) + ' ISK')
+        print(item + ' costs ' + str(partCost) + ' at ' + market)
+        print('- ' + item + ' x' + partCount[item] + ' costs: ' + str(partCost) + ' ISK' + '\n')
 
     total = round(total, 2)
     print('Total cost of parts = ' + str(total))
 
-    return(total)
+    # return(total)
 
 
 def main():
