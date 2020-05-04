@@ -1,18 +1,18 @@
 # import click  to be implemented at later date
 import requests
-import consts
+import eveConsts
 
 partDetails = []
 
 def welcome():
     print('Hello and Welcome to Jeklah\'s Ship Cost Calculator')
     print('Please choose which market you would like to use: ' + '\n')
-    for mrkt in consts.marketList:
-        print('Ξ ' + str(consts.marketList.index(mrkt)) + ' ' + mrkt.capitalize() + '\n')
+    for mrkt in eveConsts.marketList:
+        print('Ξ ' + str(eveConsts.marketList.index(mrkt)) + ' ' + mrkt.capitalize() + '\n')
 
 def choose_market():
     marketChoice = input('Choose market by number: ')
-    market = consts.marketList[int(marketChoice)]
+    market = eveConsts.marketList[int(marketChoice)]
     print('You chose ' + market.capitalize() + '\n')
 
     return(market)
@@ -40,9 +40,9 @@ def get_appraisal(item, market):
 def ship_parts_cost(market):
     orcaparts = []
     for x in range(1,7):
-        orcaparts.append(consts.capitalPartsList[x])
+        orcaparts.append(eveConsts.capitalPartsList[x])
 
-    partCount = dict(zip(orcaparts, consts.shipPartCounts['Orca']['count']))
+    partCount = dict(zip(orcaparts, eveConsts.shipPartCounts['Orca']['count']))
     total = 0
 
     for item in partCount:
