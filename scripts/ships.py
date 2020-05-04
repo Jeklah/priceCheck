@@ -62,8 +62,6 @@ def get_appraisal(item, market):
         'market': market,
     }
     req = requests.post(url, params=payload)
-    print(item)
-    print('hitting it')
     appraisal_id = req.headers['X-Appraisal-Id']
     appraisal_url = 'https://www.evepraisal.com/a/{}.json'.format(appraisal_id)
     result = requests.get(appraisal_url).json()
@@ -76,9 +74,9 @@ def get_appraisal(item, market):
     # quantity = result['items'][0]['quantity']
 
     itemName = result['items'][0]['name']
-    currAvg = result['items'][0]['prices']['buy']['avg']
-    minPrice = result['items'][0]['prices']['buy']['min']
-    maxPrice = result['items'][0]['prices']['buy']['max']
+    currAvg = result['items'][0]['prices']['sell']['avg']
+    minPrice = result['items'][0]['prices']['sell']['min']
+    maxPrice = result['items'][0]['prices']['sell']['max']
 
     partDetails = [itemName, currAvg, minPrice, maxPrice]
 
@@ -93,8 +91,10 @@ def ship_parts_cost(market):
         partCost = partDetails[1] * float(partCount[item])
         partCost = round(partCost, 2)
         total += partCost
-        print('- ' + item + 'x' + partCount[item] + ' costs: ' + str(partCost) + ' ISK')
+        print(item + ' costs ' + str(partDetails[1]))
+        print('- ' + item + ' x' + partCount[item] + ' costs: ' + str(partCost) + ' ISK')
 
+    total = round(total, 2)
     print('Total cost of parts = ' + str(total))
 
     return(total)
