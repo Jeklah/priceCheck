@@ -1,17 +1,15 @@
 **Requirements**  
 Python 3.7
 
-**Installation**
+**Installation**  
 Run the following command to install dependencies
 
 `pip install -r requirements.txt`
 
-**Using the Tool**
-
+**Using the Tool**  
 Run the script by running the following command
 
 `python scripts/ships.py`
-
 
 **Notes**
 
@@ -21,7 +19,6 @@ If python does not work, the following are worth trying:
 `python3`  
 `python3.7`  
 `python3.8`
-
 
 **For the Future**
 Please make an issue on what ship people would most like to see added next so I can keep track. 
