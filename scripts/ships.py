@@ -66,13 +66,6 @@ def get_appraisal(item, market):
     appraisal_url = 'https://www.evepraisal.com/a/{}.json'.format(appraisal_id)
     result = requests.get(appraisal_url).json()
 
-    # Notes and code that will help
-    #
-    # convert = str(result).replace('\'', '"')
-    # result['items'][0]['prices']
-    # prices = result['items'][0]['prices']['buy']
-    # quantity = result['items'][0]['quantity']
-
     itemName = result['items'][0]['name']
     currAvg = result['items'][0]['prices']['sell']['avg']
     minPrice = result['items'][0]['prices']['sell']['min']
