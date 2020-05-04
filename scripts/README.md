@@ -1,19 +1,19 @@
-[[Requirements]]
+Requirements
 Python 3.7
 
-[[Installation]]
+Installation
 run the following command to install dependencies
 
 pip install -r requirements.txt
 
-[[Using the Tool]]
+Using the Tool
 
 run the script by running the following command
 
 python ships.py
 
 
-[[Notes]]
+Notes
 
 python executable name may rely on your version installed.
 if python does not work, the following are worth trying:
