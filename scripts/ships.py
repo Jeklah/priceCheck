@@ -23,6 +23,7 @@ def get_appraisal(item, market):
         'raw_textarea': item + ' 1',
         'market': market,
     }
+
     req = requests.post(url, params=payload)
     appraisal_id  = req.headers['X-Appraisal-Id']
     appraisal_url = 'https://www.evepraisal.com/a/{}.json'.format(appraisal_id)
