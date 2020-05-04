@@ -38,7 +38,11 @@ def get_appraisal(item, market):
     return(partDetails)
 
 def ship_parts_cost(market):
-    partCount = dict(zip(consts.partsList, consts.shipPartCounts['Orca']))
+    orcaparts = []
+    for x in range(1,7):
+        orcaparts.append(consts.capitalPartsList[x])
+
+    partCount = dict(zip(orcaparts, consts.shipPartCounts['Orca']['count']))
     total = 0
 
     for item in partCount:
