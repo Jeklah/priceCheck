@@ -1,56 +1,18 @@
 # import click  to be implemented at later date
 import requests
+import consts
 
 partDetails = []
-oreList = [
-            'Tritanium',
-            'Pyerite',
-            'Isogen',
-            'Megacyte',
-            'Mexallon',
-            'Nocxium',
-            'Zydrine'
-           ]
-
-marketList = [
-                'jita',
-                'hek',
-                'amarr',
-                'rens',
-                'dodixie'
-              ]
-
-partsList = [
-                'Capital Capacitor Battery',
-                'Capital Cargo Bay',
-                'Capital Computer System',
-                'Capital Construction Parts',
-                'Capital Corporate Hangar Bay',
-                'Capital Sensor Cluster',
-                'Capital Ship Maintenance Bay'
-            ]
-
-shipPartCounts = {
-                    'Orca':{
-                        '9',
-                        '35',
-                        '7',
-                        '15',
-                        '4',
-                        '4',
-                        '7'
-                    }
-                 }
 
 def welcome():
     print('Hello and Welcome to Jeklah\'s Ship Cost Calculator')
     print('Please choose which market you would like to use: ' + '\n')
-    for mrkt in marketList:
-        print('Ξ ' + str(marketList.index(mrkt)) + ' ' + mrkt.capitalize() + '\n')
+    for mrkt in consts.marketList:
+        print('Ξ ' + str(consts.marketList.index(mrkt)) + ' ' + mrkt.capitalize() + '\n')
 
 def choose_market():
     marketChoice = input('Your choice by number: ')
-    market = marketList[int(marketChoice)]
+    market = consts.marketList[int(marketChoice)]
     print('You chose ' + market.capitalize() + '\n')
 
     return(market)
@@ -76,7 +38,7 @@ def get_appraisal(item, market):
     return(partDetails)
 
 def ship_parts_cost(market):
-    partCount = dict(zip(partsList, shipPartCounts['Orca']))
+    partCount = dict(zip(consts.partsList, consts.shipPartCounts['Orca']))
     total = 0
 
     for item in partCount:
