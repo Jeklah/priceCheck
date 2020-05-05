@@ -12,16 +12,25 @@ def welcome():
 
 def choose_market():
     marketChoice = input('Choose market by number: ')
-    market = eveConsts.marketList[int(marketChoice)]
-    print('You chose ' + market.capitalize() + '\n')
+    marketName = eveConsts.marketList[int(marketChoice)]
+    print('You chose ' + marketName.capitalize() + '\n')
 
-    return(market)
+    return(marketName)
 
-def get_appraisal(item, market):
+def choose_ship():
+    for ship in eveConsts.shipList:
+        print('Ξ ' + str(eveConsts.shipList.index(ship)) + ' ' + ship + '\n')
+    shipNum = input('Choose which ship you would like to calculate costs for: ')
+    shipChoice = eveConsts.shipList[int(shipNum)]
+    print('You chose the following ship: ' + shipChoice)
+
+    return(shipChoice)
+
+def get_appraisal(itemName, marketName):
     url = 'https://www.evepraisal.com/appraisal'
     payload = {
-        'raw_textarea': item + ' 1',
-        'market': market,
+        'raw_textarea': itemName + ' 1',
+        'market': marketName,
     }
 
     req = requests.post(url, params=payload)
@@ -38,20 +47,24 @@ def get_appraisal(item, market):
 
     return(partDetails)
 
-def ship_parts_cost(market):
-    orcaparts = []
-    for x in range(1,7):
-        orcaparts.append(eveConsts.capitalPartsList[x])
+def ship_parts_cost(shipName, marketName):
+    shipParts = []
+    if shipName == 'Orca':
+        for x in range(1,len(eveConsts.capitalPartsList)):
+            shipParts.append(eveConsts.capitalPartsList[x])
+    else:
+        for x in range(1, len(eveConsts.shipPartCounts[1][2])):
+            shipParts.append(eveConsts.eveCapitalPartsList[x])
 
-    partCount = dict(zip(orcaparts, eveConsts.shipPartCounts['Orca']['count']))
+    partCount = dict(zip(shipParts, eveConsts.shipPartCounts[0][2][1::]))
     total = 0
-
+    print(partCount)
     for item in partCount:
-        partDetails = get_appraisal(item, market)
-        partCost = partDetails[1] * float(partCount[item])
+        partDetails = get_appraisal(item, marketName)
+        partCost = partDetails[1] * float(str(partCount[item]))
         partCost = round(partCost, 2)
         total += partCost
-        print(item + ' costs ' + '{:,}'.format(round(partDetails[1], 2)) + ' ISK at ' + market.capitalize())
+        print(item + ' costs ' + '{:,}'.format(round(partDetails[1], 2)) + ' ISK at ' + marketName.capitalize())
         print('- ' + item + ' x' + partCount[item] + ' costs: ' + '{:,}'.format(partCost) + ' ISK' + '\n')
 
     total = round(total, 2)
@@ -59,8 +72,9 @@ def ship_parts_cost(market):
 
 def main():
     welcome()
-    market = choose_market()
-    ship_parts_cost(market)
+    marketName = choose_market()
+    shipName = choose_ship()
+    ship_parts_cost(shipName, marketName)
 
 if __name__ == "__main__":
     main()
