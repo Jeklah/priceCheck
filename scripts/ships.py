@@ -1,5 +1,5 @@
 import requests
-from eveConsts import shipList, marketList, capitalPartsList, oreList, shipPartCounts, pcIndex
+from eveConsts import shipList, marketList, capitalPartsList, oreList, shipPartCounts, pcIndex, partIndex
 import os
 
 shipParts = []
@@ -82,7 +82,7 @@ def ship_parts_cost(shipName, marketName):
             shipParts.append(oreList[int(x)])
 
     total = 0
-    partCount = dict(zip(shipParts, shipPartCounts[shipList.index(shipName)][2][pcIndex::]))
+    partCount = dict(zip(shipParts, shipPartCounts[shipList.index(shipName)][partIndex][pcIndex::]))
     for item in partCount:
         partDetails = get_appraisal(item, marketName)
         partCost = partDetails[pcIndex] * float(str(partCount[item]))
@@ -102,4 +102,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
