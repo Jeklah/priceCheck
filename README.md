@@ -26,8 +26,8 @@ If `python` does not work, the following are worth trying:
 **For the Future**  
 Please make an issue on what ship people would most like to see added next using 
 the templates in the .github folder and make an issue on github using it so I can keep 
-track of what's most wanted. 
-Just add your name to an open ship issue to vote, to avoid duplicate ship threads.
+track of what's most wanted.   
+Just add your name to an open ship issue to vote, to avoid duplicate ship threads.    
 I plan on adding research time into this, how deep would everyone like me to go? Add your name to the issue I will create along with
 any comments regarding this.
 Please create issues on what else you would like to see done.
