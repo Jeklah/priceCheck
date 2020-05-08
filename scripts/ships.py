@@ -11,7 +11,17 @@ def welcome():
         print('Ξ ' + str(marketList.index(mrkt)) + ' ' + mrkt.capitalize() + '\n')
 
 def choose_market():
-    marketChoice = input('Choose market by number: ')
+    while True:
+        try:
+            marketChoice = int(input('Choose market by number: '))
+        except ValueError:
+            print('Please enter your choice with numbers, not words.')
+            continue
+        if marketChoice < 0 or marketChoice > (len(marketList) - 1):   # -1 because python len uses a start index of 1
+            print('Please enter a valid number.')
+            continue
+        else:
+            break
     marketName = marketList[int(marketChoice)]
     print('You chose ' + marketName.capitalize() + '\n')
 
@@ -26,13 +36,14 @@ def choose_ship():
         try:
             shipNum = int(input('Choose which ship you would like to calculate costs for: '))
         except ValueError:
-            print('Please enter numbers not letters. Preferably in range.')
+            print('Please enter numbers not words. Preferably in range.')
             continue
-        if shipNum < 0 or shipNum > (len(shipList) - 1):   # -1 because python is sensible and len returns using a start
-            print('Please enter a valid number.')          # index of 1.
+        if shipNum < 0 or shipNum > (len(shipList) - 1):
+            print('Please enter a valid number.')
             continue
         else:
-            break;
+            break
+
     shipChoice = shipList[int(shipNum)]
     print('You chose the following ship: ' + shipChoice)
 
