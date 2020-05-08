@@ -60,8 +60,9 @@ def ship_parts_cost(shipName, marketName):
         for x in eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][1][1::]:
             shipParts.append(eveConsts.capitalPartsList[int(x)])
     elif shipName == 'Venture':
-        for x in range(len(eveConsts.oreList)):
-            shipParts.append(eveConsts.oreList[x])
+        for x in eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][1][1::]:
+            shipParts.append(eveConsts.oreList[int(x)])
+
 
     #print(shipParts)
     partCount = dict(zip(shipParts, eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][2][1::]))
