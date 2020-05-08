@@ -1,6 +1,7 @@
 # import click  to be implemented at later date
 import requests
 import eveConsts
+import os
 
 partDetails = []
 
@@ -18,6 +19,7 @@ def choose_market():
     return(marketName)
 
 def choose_ship():
+    os.system('clear')
     for ship in eveConsts.shipList:
         print('Ξ ' + str(eveConsts.shipList.index(ship)) + ' ' + ship + '\n')
     shipNum = input('Choose which ship you would like to calculate costs for: ')
