@@ -16,7 +16,7 @@ Run the script by running the following command
 **Notes**
 
 `python` executable name may rely on your version installed.
-If python does not work, the following are worth trying:
+If `python` does not work, the following are worth trying:
 
 `python3`  
 `python3.7`  
