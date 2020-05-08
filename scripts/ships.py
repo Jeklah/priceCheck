@@ -6,8 +6,8 @@ import os
 partDetails = []
 
 def welcome():
-    print('Hello and Welcome to Jeklah\'s Ship Cost Calculator')
-    print('Please choose which market you would like to use: ' + '\n')
+    print('             Hello and Welcome to Jeklah\'s Ship Cost Calculator')
+    print('             Please choose which market you would like to use: ' + '\n')
     for mrkt in marketList:
         print('Ξ ' + str(marketList.index(mrkt)) + ' ' + mrkt.capitalize() + '\n')
 
@@ -20,6 +20,7 @@ def choose_market():
 
 def choose_ship():
     os.system('clear')
+    print('             Ship Choice')
     for ship in shipList:
         print('Ξ ' + str(shipList.index(ship)) + ' ' + ship + '\n')
     shipNum = input('Choose which ship you would like to calculate costs for: ')
@@ -53,7 +54,6 @@ def ship_parts_cost(shipName, marketName):
     shipParts = []
 
     if shipName =='Orca':
-        print(shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::])
         for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
             shipParts.append(capitalPartsList[int(x)])
     elif shipName == 'Obelisk':
