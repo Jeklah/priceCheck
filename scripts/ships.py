@@ -51,29 +51,30 @@ def get_appraisal(itemName, marketName):
 
 def ship_parts_cost(shipName, marketName):
     shipParts = []
+    pcIndex = 1     # This acts as an index for partIndex as well as starting point of count, not including.
 
     if shipName =='Orca':
-        print(eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][1][1::])
-        for x in eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][1][1::]:
+        print(eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][pcIndex][pcIndex::])
+        for x in eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][pcIndex][pcIndex::]:
             shipParts.append(eveConsts.capitalPartsList[int(x)])
     elif shipName == 'Obelisk':
-        for x in eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][1][1::]:
+        for x in eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][pcIndex][pcIndex::]:
             shipParts.append(eveConsts.capitalPartsList[int(x)])
     elif shipName == 'Venture':
-        for x in eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][1][1::]:
+        for x in eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][pcIndex][pcIndex::]:
             shipParts.append(eveConsts.oreList[int(x)])
 
 
     #print(shipParts)
-    partCount = dict(zip(shipParts, eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][2][1::]))
+    partCount = dict(zip(shipParts, eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][2][pcIndex::]))
     total = 0
     print(partCount)
     for item in partCount:
         partDetails = get_appraisal(item, marketName)
-        partCost = partDetails[1] * float(str(partCount[item]))
+        partCost = partDetails[pcIndex] * float(str(partCount[item]))
         partCost = round(partCost, 2)
         total += partCost
-        print(item + ' costs ' + '{:,}'.format(round(partDetails[1], 2)) + ' ISK at ' + marketName.capitalize())
+        print(item + ' costs ' + '{:,}'.format(round(partDetails[pcIndex], 2)) + ' ISK at ' + marketName.capitalize())
         print('- ' + item + ' x' + partCount[item] + ' costs: ' + '{:,}'.format(partCost) + ' ISK' + '\n')
 
     total = round(total, 2)
