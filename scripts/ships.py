@@ -54,7 +54,7 @@ def ship_parts_cost(shipName, marketName):
             shipParts.append(eveConsts.capitalPartsList[x])
     else:
         for x in range(1, len(eveConsts.shipPartCounts[1][2])):
-            shipParts.append(eveConsts.eveCapitalPartsList[x])
+            shipParts.append(eveConsts.capitalPartsList[x])
 
     partCount = dict(zip(shipParts, eveConsts.shipPartCounts[0][2][1::]))
     total = 0
