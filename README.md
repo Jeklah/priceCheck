@@ -23,7 +23,7 @@ You could also run it directly from the scripts folder using `python ships.py`.
 **Notes**
 
 `python3` and `pip` executable name may rely on your version installed.
-If `python3`/`pip3` does not work, the following are worth trying:
+If `python3`/`pip` does not work, the following are worth trying:
 
 `pip3`  
 `pip3.7`  
