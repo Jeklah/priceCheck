@@ -26,6 +26,7 @@ def choose_market():
     marketName = marketList[int(marketChoice)]
     print('You chose ' + marketName.capitalize() + '\n')
     time.sleep(1.5)
+
     return(marketName)
 
 def choose_ship():

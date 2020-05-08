@@ -43,6 +43,3 @@ shipPartCounts = [
     (('Venture'), ('oreIndex', '2', '4', '5', '1', '0', '6'), ('count', '400', '670', '45', '6700', '22401', '20')),
     (('Providence'), ('partIndex', '0', '2', '4', '8'), ('count', '16', '75', '48', '20')),
 ]
-
-# for x in range(1,7):
-#    print(shipPartCounts[2][x])
