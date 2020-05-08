@@ -1,4 +1,5 @@
-pcIndex = 1
+pcIndex = 1     # This acts as an index for parts and a starting point for count
+partIndex = 2   # This acts as an index for parts when it is referenced to with an index of 2
 oreList = [
             'Tritanium',
             'Pyerite',
