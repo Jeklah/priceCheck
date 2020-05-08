@@ -1,9 +1,15 @@
 # Ship Cost Calculator  
 
 **Requirements**  
-Python 3.7
+[Python 3.7](https://www.python.org/downloads/release/python-370/)  
+[Git](https://git-scm.com/downloads)
 
-**Installation**  
+**Installation**
+Run the following commands to clone the git repository and move into the repo directory
+
+`git clone git@github.com:Jeklah/shipCostCalc.git`  
+`cd shipCostCalc/`
+
 Run the following command to install dependencies
 
 `pip install -r requirements.txt`
