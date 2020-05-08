@@ -63,11 +63,8 @@ def ship_parts_cost(shipName, marketName):
         for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
             shipParts.append(oreList[int(x)])
 
-
-    #print(shipParts)
     partCount = dict(zip(shipParts, shipPartCounts[shipList.index(shipName)][2][pcIndex::]))
     total = 0
-    print(partCount)
     for item in partCount:
         partDetails = get_appraisal(item, marketName)
         partCost = partDetails[pcIndex] * float(str(partCount[item]))
