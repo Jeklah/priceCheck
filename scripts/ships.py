@@ -7,6 +7,7 @@ shipParts = []
 
 def welcome():
     print('             Hello and Welcome to Jeklah\'s Ship Cost Calculator')
+    print('*** DISCLAIMER *** This tool assumes 10/20 research on bps...for now. *** DISCLAIMER ***' + '\n')
     print('             Please choose which market you would like to use: ' + '\n')
     for mrkt in marketList:
         print('Ξ ' + str(marketList.index(mrkt)) + ' ' + mrkt.capitalize() + '\n')
