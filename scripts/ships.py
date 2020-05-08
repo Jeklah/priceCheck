@@ -1,4 +1,3 @@
-# import click  to be implemented at later date
 import requests
 from eveConsts import shipList, marketList, capitalPartsList, oreList, shipPartCounts, pcIndex
 import os
@@ -29,8 +28,8 @@ def choose_ship():
         except ValueError:
             print('Please enter numbers not letters. Preferably in range.')
             continue
-        if shipNum < 0 or shipNum > (len(shipList)-1):
-            print('Please enter a valid number.')
+        if shipNum < 0 or shipNum > (len(shipList) - 1):   # -1 because python is sensible and len returns using a start
+            print('Please enter a valid number.')          # index of 1.
             continue
         else:
             break;
