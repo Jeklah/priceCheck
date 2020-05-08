@@ -1,6 +1,7 @@
 import requests
-from eveConsts import shipList, marketList, capitalPartsList, oreList, shipPartCounts, pcIndex, partIndex
+import time
 import os
+from eveConsts import shipList, marketList, capitalPartsList, oreList, shipPartCounts, pcIndex, partIndex
 
 shipParts = []
 
@@ -24,7 +25,7 @@ def choose_market():
             break
     marketName = marketList[int(marketChoice)]
     print('You chose ' + marketName.capitalize() + '\n')
-
+    time.sleep(1.5)
     return(marketName)
 
 def choose_ship():
@@ -80,6 +81,9 @@ def ship_parts_cost(shipName, marketName):
     elif shipName == 'Venture':
         for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
             shipParts.append(oreList[int(x)])
+    elif shipName == 'Providence':
+        for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
+            shipParts.append(capitalPartsList[int(x)])
 
     total = 0
     partCount = dict(zip(shipParts, shipPartCounts[shipList.index(shipName)][partIndex][pcIndex::]))
