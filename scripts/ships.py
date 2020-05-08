@@ -20,10 +20,10 @@ def choose_market():
 
 def choose_ship():
     os.system('clear')
-    for ship in eveConsts.shipList:
-        print('Ξ ' + str(eveConsts.shipList.index(ship)) + ' ' + ship + '\n')
+    for ship in shipList:
+        print('Ξ ' + str(shipList.index(ship)) + ' ' + ship + '\n')
     shipNum = input('Choose which ship you would like to calculate costs for: ')
-    shipChoice = eveConsts.shipList[int(shipNum)]
+    shipChoice = shipList[int(shipNum)]
     print('You chose the following ship: ' + shipChoice)
 
     return(shipChoice)
