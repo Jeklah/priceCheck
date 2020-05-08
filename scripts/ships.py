@@ -55,10 +55,10 @@ def ship_parts_cost(shipName, marketName):
     if shipName =='Orca':
         print(shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::])
         for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
-            shipParts.append(eveConsts.capitalPartsList[int(x)])
+            shipParts.append(capitalPartsList[int(x)])
     elif shipName == 'Obelisk':
         for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
-            shipParts.append(eveConsts.capitalPartsList[int(x)])
+            shipParts.append(capitalPartsList[int(x)])
     elif shipName == 'Venture':
         for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
             shipParts.append(oreList[int(x)])
