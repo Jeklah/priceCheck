@@ -9,7 +9,8 @@ Run the following command to install dependencies
 `pip install -r requirements.txt`
 
 **Using the Tool**  
-Run the script by running the following command
+Run the script by running the following command from the shipCostCalc folder.
+You could also run it directly from the scripts folder using `python ships.py`.
 
 `python scripts/ships.py`
 
