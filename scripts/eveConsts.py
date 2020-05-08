@@ -1,3 +1,4 @@
+pcIndex = 1
 oreList = [
             'Tritanium',
             'Pyerite',
