@@ -23,7 +23,17 @@ def choose_ship():
     print('             Ship Choice')
     for ship in shipList:
         print('Ξ ' + str(shipList.index(ship)) + ' ' + ship + '\n')
-    shipNum = input('Choose which ship you would like to calculate costs for: ')
+    while True:
+        try:
+            shipNum = int(input('Choose which ship you would like to calculate costs for: '))
+        except ValueError:
+            print('Please enter numbers not letters. Preferably in range.')
+            continue
+        if shipNum < 0 or shipNum > (len(shipList)-1):
+            print('Please enter a valid number.')
+            continue
+        else:
+            break;
     shipChoice = shipList[int(shipNum)]
     print('You chose the following ship: ' + shipChoice)
 
