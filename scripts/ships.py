@@ -61,7 +61,7 @@ def ship_parts_cost(shipName, marketName):
             shipParts.append(eveConsts.capitalPartsList[int(x)])
     elif shipName == 'Venture':
         for x in eveConsts.shipPartCounts[shipList.index(shipName)][eveConsts.pcIndex][eveConsts.pcIndex::]:
-            shipParts.append(eveConsts.oreList[int(x)])
+            shipParts.append(oreList[int(x)])
 
 
     #print(shipParts)
