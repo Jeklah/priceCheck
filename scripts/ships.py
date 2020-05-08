@@ -66,8 +66,6 @@ def ship_parts_cost(shipName, marketName):
     total = 0
     print(partCount)
     for item in partCount:
-        print(item)
-        print(marketName)
         partDetails = get_appraisal(item, marketName)
         partCost = partDetails[1] * float(str(partCount[item]))
         partCost = round(partCost, 2)
