@@ -1,6 +1,6 @@
 # import click  to be implemented at later date
 import requests
-import eveConsts
+from eveConsts import shipList, marketList, capitalPartsList, oreList, shipPartCounts, pcIndex
 import os
 
 partDetails = []
@@ -8,12 +8,12 @@ partDetails = []
 def welcome():
     print('Hello and Welcome to Jeklah\'s Ship Cost Calculator')
     print('Please choose which market you would like to use: ' + '\n')
-    for mrkt in eveConsts.marketList:
-        print('Ξ ' + str(eveConsts.marketList.index(mrkt)) + ' ' + mrkt.capitalize() + '\n')
+    for mrkt in marketList:
+        print('Ξ ' + str(marketList.index(mrkt)) + ' ' + mrkt.capitalize() + '\n')
 
 def choose_market():
     marketChoice = input('Choose market by number: ')
-    marketName = eveConsts.marketList[int(marketChoice)]
+    marketName = marketList[int(marketChoice)]
     print('You chose ' + marketName.capitalize() + '\n')
 
     return(marketName)
@@ -51,30 +51,29 @@ def get_appraisal(itemName, marketName):
 
 def ship_parts_cost(shipName, marketName):
     shipParts = []
-    pcIndex = 1     # This acts as an index for partIndex as well as starting point of count, not including.
 
     if shipName =='Orca':
-        print(eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][pcIndex][pcIndex::])
-        for x in eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][pcIndex][pcIndex::]:
+        print(eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][eveConsts.pcIndex][eveConsts.pcIndex::])
+        for x in eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][eveConsts.pcIndex][eveConsts.pcIndex::]:
             shipParts.append(eveConsts.capitalPartsList[int(x)])
     elif shipName == 'Obelisk':
-        for x in eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][pcIndex][pcIndex::]:
+        for x in eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][eveConsts.pcIndex][eveConsts.pcIndex::]:
             shipParts.append(eveConsts.capitalPartsList[int(x)])
     elif shipName == 'Venture':
-        for x in eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][pcIndex][pcIndex::]:
+        for x in eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][eveConsts.pcIndex][eveConsts.pcIndex::]:
             shipParts.append(eveConsts.oreList[int(x)])
 
 
     #print(shipParts)
-    partCount = dict(zip(shipParts, eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][2][pcIndex::]))
+    partCount = dict(zip(shipParts, eveConsts.shipPartCounts[eveConsts.shipList.index(shipName)][2][eveConsts.pcIndex::]))
     total = 0
     print(partCount)
     for item in partCount:
         partDetails = get_appraisal(item, marketName)
-        partCost = partDetails[pcIndex] * float(str(partCount[item]))
+        partCost = partDetails[eveConsts.pcIndex] * float(str(partCount[item]))
         partCost = round(partCost, 2)
         total += partCost
-        print(item + ' costs ' + '{:,}'.format(round(partDetails[pcIndex], 2)) + ' ISK at ' + marketName.capitalize())
+        print(item + ' costs ' + '{:,}'.format(round(partDetails[eveConsts.pcIndex], 2)) + ' ISK at ' + marketName.capitalize())
         print('- ' + item + ' x' + partCount[item] + ' costs: ' + '{:,}'.format(partCost) + ' ISK' + '\n')
 
     total = round(total, 2)
