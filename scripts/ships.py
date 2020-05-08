@@ -49,12 +49,15 @@ def get_appraisal(itemName, marketName):
 
 def ship_parts_cost(shipName, marketName):
     shipParts = []
-    if shipName == 'Orca':
+    if shipName =='Orca':
         for x in range(1,len(eveConsts.capitalPartsList)):
             shipParts.append(eveConsts.capitalPartsList[x])
-    else:
+    elif shipName == 'Obelisk':
         for x in range(1, len(eveConsts.shipPartCounts[1][2])):
             shipParts.append(eveConsts.capitalPartsList[x])
+    else:
+        for x in range(len(eveConsts.oreList)):
+            shipParts.append(eveConsts.oreList[x])
 
     partCount = dict(zip(shipParts, eveConsts.shipPartCounts[0][2][1::]))
     total = 0
