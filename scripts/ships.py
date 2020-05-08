@@ -2,7 +2,7 @@ import requests
 from eveConsts import shipList, marketList, capitalPartsList, oreList, shipPartCounts, pcIndex
 import os
 
-partDetails = []
+shipParts = []
 
 def welcome():
     print('             Hello and Welcome to Jeklah\'s Ship Cost Calculator')
@@ -71,8 +71,6 @@ def get_appraisal(itemName, marketName):
     return(partDetails)
 
 def ship_parts_cost(shipName, marketName):
-    shipParts = []
-
     if shipName =='Orca':
         for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
             shipParts.append(capitalPartsList[int(x)])
@@ -83,8 +81,8 @@ def ship_parts_cost(shipName, marketName):
         for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
             shipParts.append(oreList[int(x)])
 
-    partCount = dict(zip(shipParts, shipPartCounts[shipList.index(shipName)][2][pcIndex::]))
     total = 0
+    partCount = dict(zip(shipParts, shipPartCounts[shipList.index(shipName)][2][pcIndex::]))
     for item in partCount:
         partDetails = get_appraisal(item, marketName)
         partCost = partDetails[pcIndex] * float(str(partCount[item]))
