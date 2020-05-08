@@ -7,7 +7,7 @@
 **Installation**
 Run the following commands to clone the git repository and move into the repo directory
 
-`git clone git@github.com:Jeklah/shipCostCalc.git`  
+`git clone https://github.com/Jeklah/shipCostCalc.git`  
 `cd shipCostCalc/`
 
 Run the following command to install dependencies
