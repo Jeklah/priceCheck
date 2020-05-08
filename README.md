@@ -18,14 +18,16 @@ Run the following command to install dependencies
 Run the script by running the following command from the shipCostCalc folder.
 You could also run it directly from the scripts folder using `python ships.py`.
 
-`python scripts/ships.py`
+`python3 scripts/ships.py`
 
 **Notes**
 
-`python` executable name may rely on your version installed.
-If `python` does not work, the following are worth trying:
+`python3` and `pip` executable name may rely on your version installed.
+If `python3`/`pip3` does not work, the following are worth trying:
 
-`python3`  
+`pip3`  
+`pip3.7`  
+`pip3.8`  
 `python3.7`  
 `python3.8`
 
