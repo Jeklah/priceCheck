@@ -4,7 +4,7 @@
 [Python 3.7](https://www.python.org/downloads/release/python-370/)  
 [Git](https://git-scm.com/downloads)
 
-**Installation**
+**Installation**  
 Run the following commands to clone the git repository and move into the repo directory
 
 `git clone https://github.com/Jeklah/shipCostCalc.git`  
@@ -16,12 +16,11 @@ Run the following command to install dependencies
 
 **Using the Tool**  
 Run the script by running the following command from the shipCostCalc folder.
-You could also run it directly from the scripts folder using `python ships.py`.
+You could also run it directly from the scripts folder using `python3 ships.py`.
 
 `python3 scripts/ships.py`
 
-**Notes**
-
+**Notes**   
 `python3` and `pip` executable name may rely on your version installed.
 If `python3`/`pip` does not work, the following are worth trying:
 
@@ -37,6 +36,8 @@ the [templates](https://github.com/Jeklah/shipCostCalc/tree/master/.github/ISSUE
 Just add your name to an open ship issue to vote, to avoid duplicate ship threads.    
 I plan on adding research time into this, how deep would everyone like me to go? Add your name to the issue I will create along with
 any comments regarding this.
-Please create issues on what else you would like to see done.
+Please create issues on what else you would like to see done.  
+
+Also, if anyone finds any problems, please create an issue :D and tag it with 'Bug' please. Thanks.
 
 Enjoy

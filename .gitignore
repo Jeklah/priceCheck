@@ -244,9 +244,9 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 
-# Ignore directories.
-
 # Object Files
 *.o
+
+# eve online venv config file and pycache dir
 pyvenv.cfg
 scripts/__pycache__/
