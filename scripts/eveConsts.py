@@ -23,6 +23,7 @@ shipList = [
                 'Obelisk',
                 'Venture',
                 'Providence',
+                'Caracal',
 ]
 
 capitalPartsList = [
@@ -42,4 +43,5 @@ shipPartCounts = [
     (('Obelisk'), ('partIndex', '0', '2', '4', '8'), ('count', '15', '81', '51', '16')),
     (('Venture'), ('oreIndex', '2', '4', '5', '1', '0', '6'), ('count', '400', '670', '45', '6700', '22401', '20')),
     (('Providence'), ('partIndex', '0', '2', '4', '8'), ('count', '16', '75', '48', '20')),
+    (('Caracal'), ('oreIndex', '2', '3', '4', '5', '1', '0', '6'), ('count', '9400', '501', '33001', '3000', '110000', '490000', '1260')),
 ]
