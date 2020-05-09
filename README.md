@@ -16,7 +16,7 @@ Run the following command to install dependencies
 
 **Using the Tool**  
 Run the script by running the following command from the shipCostCalc folder.
-You could also run it directly from the scripts folder using `python ships.py`.
+You could also run it directly from the scripts folder using `python3 ships.py`.
 
 `python3 scripts/ships.py`
 
