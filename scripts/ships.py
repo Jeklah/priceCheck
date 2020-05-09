@@ -87,6 +87,11 @@ def ship_parts_cost(shipName, marketName):
         for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
             shipParts.append(capitalPartsList[int(x)])
 
+    for ship in shipList:
+        if shipName is ship:
+            for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
+
+
     total = 0
     partCount = dict(zip(shipParts, shipPartCounts[shipList.index(shipName)][partIndex][pcIndex::]))
     for item in partCount:
