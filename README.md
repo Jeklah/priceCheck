@@ -37,6 +37,8 @@ the [templates](https://github.com/Jeklah/shipCostCalc/tree/master/.github/ISSUE
 Just add your name to an open ship issue to vote, to avoid duplicate ship threads.    
 I plan on adding research time into this, how deep would everyone like me to go? Add your name to the issue I will create along with
 any comments regarding this.
-Please create issues on what else you would like to see done.
+Please create issues on what else you would like to see done.  
+
+Also, if anyone finds any problems, please create an issue :D and tag it with 'Bug' please. Thanks.
 
 Enjoy
