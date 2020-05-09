@@ -12,7 +12,7 @@ Run the following commands to clone the git repository and move into the repo di
 
 Run the following command to install dependencies
 
-`pip install -r requirements.txt`
+`pip3 install -r requirements.txt`
 
 **Using the Tool**  
 Run the script by running the following command from the shipCostCalc folder.
@@ -21,10 +21,9 @@ You could also run it directly from the scripts folder using `python3 ships.py`.
 `python3 scripts/ships.py`
 
 **Notes**   
-`python3` and `pip` executable name may rely on your version installed.
-If `python3`/`pip` does not work, the following are worth trying:
-
-`pip3`  
+`python3` and `pip3` executable name may rely on your version installed.
+If `python3`/`pip3` does not work, the following are worth trying:
+  
 `pip3.7`  
 `pip3.8`  
 `python3.7`  
