@@ -74,21 +74,26 @@ def get_appraisal(itemName, marketName):
     return(partDetails)
 
 def ship_parts_cost(shipName, marketName):
-    if shipName =='Orca':
-        for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
-            shipParts.append(capitalPartsList[int(x)])
-    elif shipName == 'Obelisk':
-        for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
-            shipParts.append(capitalPartsList[int(x)])
-    elif shipName == 'Venture':
-        for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
-            shipParts.append(oreList[int(x)])
-    elif shipName == 'Providence':
-        for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
-            shipParts.append(capitalPartsList[int(x)])
-    elif shipName == 'Caracal':
-        for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
-            shipParts.append(oreList[int(x)])
+    # if shipName =='Orca':
+    #     for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
+    #         shipParts.append(capitalPartsList[int(x)])
+    # elif shipName == 'Obelisk':
+    #     for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
+    #         shipParts.append(capitalPartsList[int(x)])
+    # elif shipName == 'Venture':
+    #     for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
+    #         shipParts.append(oreList[int(x)])
+    # elif shipName == 'Providence':
+    #     for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
+    #         shipParts.append(capitalPartsList[int(x)])
+
+    for ship in shipList:
+        if shipName is ship:
+            for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
+                if shipPartCounts[shipList.index(shipName)][pcIndex][0] == 'oreIndex':
+                    shipParts.append(oreList[int(x)])
+                else:
+                    shipParts.append(capitalPartsList[int(x)])
 
     total = 0
     partCount = dict(zip(shipParts, shipPartCounts[shipList.index(shipName)][partIndex][pcIndex::]))
