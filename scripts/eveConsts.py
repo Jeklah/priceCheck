@@ -1,5 +1,6 @@
-pcIndex = 1     # This acts as an index for parts and a starting point for count
-partIndex = 2   # This acts as an index for parts when it is referenced to with an index of 2
+ptIndex = 1     # Index for the indicator value of partindex list of ships
+countIndex = 1  # Index for the indicator value of countindex list of ships
+partIndex = 2   # This acts as an index for when the partindex list needs to be referenced
 oreList = [
             'Tritanium',
             'Pyerite',

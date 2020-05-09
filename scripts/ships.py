@@ -1,7 +1,7 @@
 import requests
 import time
 import os
-from eveConsts import shipList, marketList, capitalPartsList, oreList, shipPartCounts, pcIndex, partIndex
+from eveConsts import shipList, marketList, capitalPartsList, oreList, shipPartCounts, partIndex, ptIndex, countIndex
 
 shipParts = []
 
@@ -89,20 +89,20 @@ def ship_parts_cost(shipName, marketName):
 
     for ship in shipList:
         if shipName is ship:
-            for x in shipPartCounts[shipList.index(shipName)][pcIndex][pcIndex::]:
-                if shipPartCounts[shipList.index(shipName)][pcIndex][0] == 'oreIndex':
+            for x in shipPartCounts[shipList.index(shipName)][ptIndex][countIndex::]:
+                if shipPartCounts[shipList.index(shipName)][ptIndex][0] == 'oreIndex':
                     shipParts.append(oreList[int(x)])
                 else:
                     shipParts.append(capitalPartsList[int(x)])
 
     total = 0
-    partCount = dict(zip(shipParts, shipPartCounts[shipList.index(shipName)][partIndex][pcIndex::]))
+    partCount = dict(zip(shipParts, shipPartCounts[shipList.index(shipName)][partIndex][countIndex::]))
     for item in partCount:
         partDetails = get_appraisal(item, marketName)
-        partCost = partDetails[pcIndex] * float(str(partCount[item]))
+        partCost = partDetails[ptIndex] * float(str(partCount[item]))
         partCost = round(partCost, 2)
         total += partCost
-        print(item + ' costs ' + '{:,}'.format(round(partDetails[pcIndex], 2)) + ' ISK at ' + marketName.capitalize())
+        print(item + ' costs ' + '{:,}'.format(round(partDetails[ptIndex], 2)) + ' ISK at ' + marketName.capitalize())
         print('- ' + item + ' x' + partCount[item] + ' costs: ' + '{:,}'.format(partCost) + ' ISK' + '\n')
 
     total = round(total, 2)
