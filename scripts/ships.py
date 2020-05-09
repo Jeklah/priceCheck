@@ -81,6 +81,7 @@ def ship_parts_cost(shipName, marketName):
                     shipParts.append(oreList[int(x)])
                 else:
                     shipParts.append(capitalPartsList[int(x)])
+            break
 
     total = 0
     partCount = dict(zip(shipParts, shipPartCounts[shipList.index(shipName)][partIndex][countIndex::]))
