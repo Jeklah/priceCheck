@@ -4,9 +4,12 @@
 # Author: Jeklah
 # Date: 10/05/2020
 
-ptIndex = 1     # Index for the indicator value of partindex list of ships
-countIndex = 1  # Index for the indicator value of countindex list of ships
+ptIndex = 1     # Index for the indicator value of partindex in shipPartCounts
+countIndex = 1  # Index for the indicator value of countindex in shipPartCounts
+shipIndex = 0   # Index for the name of the ship in shipPartCounts
 partIndex = 2   # This acts as an index for when the partindex list needs to be referenced
+shipList = []   # Initalising the list.
+
 oreList = [
             'Tritanium',
             'Pyerite',
@@ -24,15 +27,6 @@ marketList = [
                 'rens',
                 'dodixie'
               ]
-
-shipList = [
-                'Orca',
-                'Obelisk',
-                'Venture',
-                'Providence',
-                'Caracal',
-                'Gila',
-]
 
 capitalPartsList = [
                 'Capital Armor Plates',
@@ -54,3 +48,6 @@ shipPartCounts = [
     (('Caracal'), ('oreIndex', '2', '3', '4', '5', '1', '0', '6'), ('count', '9400', '501', '33001', '3000', '110000', '490000', '1260')),
     (('Gila'), ('oreIndex', '2', '3', '4', '5', '1', '0', '6'), ('count', '8719', '321', '35917', '2149', '138810', '552921', '1082')),
 ]
+
+for ship in shipPartCounts:
+    shipList.append(ship[shipIndex])
