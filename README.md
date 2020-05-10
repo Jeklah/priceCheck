@@ -4,9 +4,9 @@
 This is a tool aimed to do away with hard to understand, easily breaking spreadsheets to work out
 the cost of building ships and possibly other things in the future.
 
-No knowledge of programming or Python is needed to run this tool. Only the requirements below.
-As a FYI, if anyone is interested and/or doesn't know and for some context (may help understanding 'installing and running'),
-Python is a programming language.
+No knowledge of programming or Python is needed to run this tool. Only the requirements below.  
+As a FYI, if anyone is interested and/or doesn't know and for some context (may help understanding 'installing and running').  
+Python is a programming language.  
 Git is a source code management tool. Github is an unrelated site to upload git repositories to as back and
 for distribution (like this).
 
@@ -15,17 +15,28 @@ for distribution (like this).
 [Git](https://git-scm.com/downloads)
 
 **Installation**  
-Run the following commands from to clone the git repository and move into the repo directory
+Push the Windows button and type `git`. Launch the Git Bash app.
+Run the following commands in the Git Bash app to clone the git repository and find out what directory it's in
 
 `git clone https://github.com/Jeklah/shipCostCalc.git`  
-`cd shipCostCalc/`
+`pwd`  
 
+You should get an output of a directory path, for me its:`/d/Projects/shipCostCalc`  
+
+Push the Windows button and type `cmd` and launch as administrator (if you aren't already).  
+Go to the directory path found out using `pwd`.  
+Use `cd` to change directories. e.g `cd C:\test\shipCostCalc`. Notice that the slashes are backwards in cmd and
+forwards when using Git Bash app. Using the wrong slash will result in an error.  
+If you need to change drives (you're in C:\ and its been cloned somewhere in D:\ ) just type the letter of the drive
+then colon to change drives. e.g to change from C:\ to D:\ type: `d:` and push enter.  
+
+Once you're in the shipCostCalc directory in cmd we're ready to install the dependencies.  
 Run the following command to install dependencies
 
 `pip3 install -r requirements.txt`
 
 **Using the Tool**  
-Run the script by running the following command from the shipCostCalc folder.
+Run the script by running the following command from the shipCostCalc folder in cmd.
 You could also run it directly from the scripts folder using `python3 ships.py`.
 
 `python3 scripts/ships.py`
