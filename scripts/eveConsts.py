@@ -38,6 +38,11 @@ capitalPartsList = [
                 'Capital Sensor Cluster',
                 'Capital Ship Maintenance Bay',
                 'Capital Propulsion Engine',
+                'Capital Clone Vat Bay',
+                'Capital Drone Bay',
+                'Capital Jump Drive',
+                'Capital Power Generator',
+                'Capital Shield Emitter'
             ]
 
 shipPartCounts = [
