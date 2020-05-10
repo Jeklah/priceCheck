@@ -14,7 +14,7 @@ import time
 import os
 from eveConsts import shipList, marketList, capitalPartsList, oreList, shipPartCounts, partIndex, ptIndex, countIndex
 
-shipParts = []
+shipParts = []      # Initialising the list.
 
 def welcome():
     print('             Hello and Welcome to Jeklah\'s Ship Cost Calculator')
