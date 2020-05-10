@@ -18,8 +18,8 @@ shipParts = []
 
 def welcome():
     print('             Hello and Welcome to Jeklah\'s Ship Cost Calculator')
-    print('*** DISCLAIMER *** This tool assumes 10/20 research on bps...for now. *** DISCLAIMER ***' + '\n')
-    print('             Please choose which market you would like to use: ' + '\n')
+    print('*** DISCLAIMER *** This tool assumes 10/20 research on bps...for now. *** DISCLAIMER ***')
+    print('             Please choose which market you would like to use: ')
     for mrkt in marketList:
         print('Ξ ' + str(marketList.index(mrkt)) + ' ' + mrkt.capitalize() + '\n')
 
@@ -36,7 +36,7 @@ def choose_market():
         else:
             break
     marketName = marketList[int(marketChoice)]
-    print('You chose ' + marketName.capitalize() + '\n')
+    print('You chose ' + marketName.capitalize())
     time.sleep(1.5)
 
     return(marketName)
@@ -59,7 +59,7 @@ def choose_ship():
             break
 
     shipChoice = shipList[int(shipNum)]
-    print('You chose the following ship: ' + shipChoice)
+    print('You chose the following ship: ' + shipChoice + '\n')
 
     return(shipChoice)
 
