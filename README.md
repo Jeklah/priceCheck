@@ -1,11 +1,21 @@
 # Ship Cost Calculator  
 
+**Introduction**
+This is a tool aimed to do away with hard to understand, easily breaking spreadsheets to work out
+the cost of building ships and possibly other things in the future.
+
+No knowledge of programming or Python is needed to run this tool. Only the requirements below.
+As a FYI, if anyone is interested and/or doesn't know and for some context (may help understanding 'installing and running'),
+Python is a programming language.
+Git is a source code management tool. Github is an unrelated site to upload git repositories to as back and
+for distribution (like this).
+
 **Requirements**  
 [Python 3.7](https://www.python.org/downloads/release/python-370/)  
 [Git](https://git-scm.com/downloads)
 
 **Installation**  
-Run the following commands to clone the git repository and move into the repo directory
+Run the following commands from to clone the git repository and move into the repo directory
 
 `git clone https://github.com/Jeklah/shipCostCalc.git`  
 `cd shipCostCalc/`
@@ -20,10 +30,10 @@ You could also run it directly from the scripts folder using `python3 ships.py`.
 
 `python3 scripts/ships.py`
 
-**Notes**   
+**Notes**  
 `python3` and `pip3` executable name may rely on your version installed.
 If `python3`/`pip3` does not work, the following are worth trying:
-  
+
 `pip3.7`  
 `pip3.8`  
 `python3.7`  
@@ -32,7 +42,7 @@ If `python3`/`pip3` does not work, the following are worth trying:
 **For the Future**  
 Please make an issue on what ship people would most like to see added next using 
 the [templates](https://github.com/Jeklah/shipCostCalc/tree/master/.github/ISSUE_TEMPLATE) in the .github folder and make an issue on [the issue page](https://github.com/Jeklah/shipCostCalc/issues) using it so I can keep track of what's most wanted.   
-Just add your name to an open ship issue to vote, to avoid duplicate ship threads.    
+Just add your name to an open ship issue to vote, to avoid duplicate ship threads.  
 I plan on adding research time into this, how deep would everyone like me to go? Add your name to the issue I will create along with
 any comments regarding this.
 Please create issues on what else you would like to see done.  
