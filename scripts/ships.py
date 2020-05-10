@@ -102,7 +102,7 @@ def ship_parts_cost(shipName, marketName):
         partCost = round(partCost, 2)
         total += partCost
         print(item + ' costs ' + '{:,}'.format(round(partDetails[ptIndex], 2)) + ' ISK at ' + marketName.capitalize())
-        print('- ' + item + ' x' + partCount[item] + ' costs: ' + '{:,}'.format(partCost) + ' ISK' + '\n')
+        print('- ' + item + ' x ' + partCount[item] + ' costs: ' + '{:,}'.format(partCost) + ' ISK' + '\n')
 
     total = round(total, 2)
     print('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
