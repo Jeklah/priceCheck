@@ -2,7 +2,7 @@
 #
 # This is a tool aimed at helping people estimate the costs of building a ship without
 # the use of complicated spreadsheets that seem to break regularly, aren't easy to maintain and
-# hard to use/understand/
+# hard to use/understand.
 #
 # This tool aims to solve all of that by being easy to use, maintain and easily expandable.
 #
