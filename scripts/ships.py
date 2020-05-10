@@ -1,3 +1,14 @@
+# Ship Cost Calculator CLI tool for Eve Online
+#
+# This is a tool aimed at helping people estimate the costs of building a ship without
+# the use of complicated spreadsheets that seem to break regularly, aren't easy to maintain and
+# hard to use/understand/
+#
+# This tool aims to solve all of that by being easy to use, maintain and easily expandable.
+#
+# Author: Arthur Bowers/Jeklah
+# Date: 10/05/2020
+
 import requests
 import time
 import os

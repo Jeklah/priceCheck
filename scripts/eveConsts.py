@@ -1,3 +1,9 @@
+# This is the constants file for the ship cost calculator.
+# It may grow to contain more general eve constants so will keep the name 'eveConsts'
+#
+# Author: Jeklah
+# Date: 10/05/2020
+
 ptIndex = 1     # Index for the indicator value of partindex list of ships
 countIndex = 1  # Index for the indicator value of countindex list of ships
 partIndex = 2   # This acts as an index for when the partindex list needs to be referenced
