@@ -28,7 +28,6 @@ Push the Windows button and type `cmd` and launch as administrator (if you aren'
 Go to the directory path found out using `pwd`.  
 
 **Navigation in cmd**  
-
 Use `cd` to change directories. e.g `cd C:\test\shipCostCalc`. Notice that the slashes are backwards in cmd and
 forwards when using Git Bash app. Using the wrong slash will result in an error.  
 If you need to change drives (you're in C:\ and its been cloned somewhere in D:\ ) just type the letter of the drive
