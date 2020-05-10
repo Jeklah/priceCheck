@@ -1,6 +1,6 @@
 # Ship Cost Calculator  
 
-**Introduction**
+**Introduction**  
 This is a tool aimed to do away with hard to understand, easily breaking spreadsheets to work out
 the cost of building ships and possibly other things in the future.
 
@@ -15,8 +15,9 @@ for distribution (like this).
 [Git](https://git-scm.com/downloads)
 
 **Installation**  
-Push the Windows button and type `git`. Launch the Git Bash app.
-Run the following commands in the Git Bash app to clone the git repository and find out what directory it's in
+Push the Windows button and type `git`.  
+Launch the Git Bash app.  
+Run the following commands in the Git Bash app to clone the git repository and find out what directory it's in.  
 
 `git clone https://github.com/Jeklah/shipCostCalc.git`  
 `pwd`  
@@ -25,6 +26,7 @@ You should get an output of a directory path, for me its:`/d/Projects/shipCostCa
 
 Push the Windows button and type `cmd` and launch as administrator (if you aren't already).  
 Go to the directory path found out using `pwd`.  
+**Navigation in cmd**  
 Use `cd` to change directories. e.g `cd C:\test\shipCostCalc`. Notice that the slashes are backwards in cmd and
 forwards when using Git Bash app. Using the wrong slash will result in an error.  
 If you need to change drives (you're in C:\ and its been cloned somewhere in D:\ ) just type the letter of the drive
