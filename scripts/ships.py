@@ -17,7 +17,15 @@ from eveConsts import shipList, marketList, capitalPartsList, oreList, shipPartC
 
 shipParts = []      # Initialising the list.
 
+#@click.command()
 def welcome():
+    """
+    A ship cost calulator tool for Eve Online. This will query the chosen market
+    for the prices of the cost of the parts or minerals it takes to build your chosen
+    ship. Note: It assumes that the blueprint of the ship you're making is fully researched
+    to 10/20. This could be added as an extra feature if there is demand for it.
+
+    """
     os.system('clear')
     print('             Hello and Welcome to Jeklah\'s Ship Cost Calculator' + '\n')
     print('*** DISCLAIMER *** This tool assumes 10/20 research on bps...for now. *** DISCLAIMER ***')
@@ -25,6 +33,7 @@ def welcome():
     for mrkt in marketList:
         print('Ξ ' + str(marketList.index(mrkt)) + ' ' + mrkt.capitalize() + '\n')
 
+#@click.command()
 def choose_market():
     while True:
         try:
@@ -42,7 +51,7 @@ def choose_market():
     time.sleep(1.5)
 
     return(marketName)
-
+#@click.command()
 def choose_ship():
     os.system('clear')
     print('                              Ship Choice')
@@ -110,15 +119,7 @@ def ship_parts_cost(shipName, marketName):
     total = round(total, 2)
     print('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
 
-@click.command()
 def main():
-    """
-    A ship cost calulator tool for Eve Online. This will query the chosen market
-    for the prices of the cost of the parts or minerals it takes to build your chosen
-    ship. Note: It assumes that the blueprint of the ship you're making is fully researched
-    to 10/20. This could be added as an extra feature if there is demand for it.
-
-    """
     welcome()
     marketName = choose_market()
     shipName = choose_ship()
