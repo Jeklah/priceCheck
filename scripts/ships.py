@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # Ship Cost Calculator CLI tool for Eve Online
 #
 # This is a tool aimed at helping people estimate the costs of building a ship without
@@ -37,14 +37,9 @@ def welcome():
 #@click.command()
 def choose_market():
     while True:
-        try:
-            marketChoice = int(input('Choose market by number: '))
-        except ValueError:
-            click.echo('Please enter your choice with numbers, not words.')
-            continue
+        marketChoice = click.prompt('Please Choose a Market: ', type = int)
         if marketChoice < 0 or marketChoice > (len(marketList) - 1):   # -1 because python len uses a start index of 1
-            click.echo('Please enter a valid number.')
-            continue
+            click.echo('Please enter a number in range.')
         else:
             break
     marketName = marketList[int(marketChoice)]
@@ -54,19 +49,15 @@ def choose_market():
     return(marketName)
 #@click.command()
 def choose_ship():
-    os.system('clear')
+    #os.system('clear')
     click.echo('                              Ship Choice')
     click.echo('                 Please choose which ship you would like')
     for ship in shipList:
         click.echo('Ξ ' + str(shipList.index(ship)) + ' ' + ship + '\n')
     while True:
-        try:
-            shipNum = int(input('Choose which ship you would like to calculate costs for: '))
-        except ValueError:
-            click.echo('Please enter numbers not words. Preferably in range.')
-            continue
+        shipNum = click.prompt('Choose which ship you would like to calculate costs for: ', type = int)
         if shipNum < 0 or shipNum > (len(shipList) - 1):
-            click.echo('Please enter a valid number.')
+            click.echo('Please enter a number in range.')
             continue
         else:
             break
