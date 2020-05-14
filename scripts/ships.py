@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Ship Cost Calculator CLI tool for Eve Online
 #
 # This is a tool aimed at helping people estimate the costs of building a ship without
