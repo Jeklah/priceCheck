@@ -9,6 +9,7 @@
 # Author: Arthur Bowers/Jeklah
 # Date: 10/05/2020
 
+import click
 import requests
 import time
 import os
@@ -109,7 +110,15 @@ def ship_parts_cost(shipName, marketName):
     total = round(total, 2)
     print('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
 
+@click.command()
 def main():
+    """
+    A ship cost calulator tool for Eve Online. This will query the chosen market
+    for the prices of the cost of the parts or minerals it takes to build your chosen
+    ship. Note: It assumes that the blueprint of the ship you're making is fully researched
+    to 10/20. This could be added as an extra feature if there is demand for it.
+
+    """
     welcome()
     marketName = choose_market()
     shipName = choose_ship()
