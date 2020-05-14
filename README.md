@@ -7,8 +7,9 @@ the cost of building ships and possibly other things in the future.
 No knowledge of programming or Python is needed to run this tool. Only the requirements below.  
 As a FYI, if anyone is interested and/or doesn't know and for some context (may help understanding 'installing and running').  
 Python is a programming language.  
-Git is a source code management tool. Github is an unrelated site to upload git repositories to as back and
-for distribution (like this).
+Git is a source code management tool. Github is an unrelated site to upload git repositories to as backup and
+for distribution (like this).  
+pwd is a small command in bash that stands for present working directory and it just prints the directory you're in.
 
 **Requirements**  
 [Python 3.7](https://www.python.org/downloads/release/python-370/)  
