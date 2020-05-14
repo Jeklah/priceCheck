@@ -36,12 +36,7 @@ def welcome():
 
 #@click.command()
 def choose_market():
-    while True:
-        marketChoice = click.prompt('Please Choose a Market: ', type = int)
-        if marketChoice < 0 or marketChoice > (len(marketList) - 1):   # -1 because python len uses a start index of 1
-            click.echo('Please enter a number in range.')
-        else:
-            break
+    marketChoice = click.prompt('Please Choose a Market: ', type=click.IntRange(0, len(marketList)))
     marketName = marketList[int(marketChoice)]
     click.echo('You chose ' + marketName.capitalize())
     time.sleep(1.5)
@@ -54,14 +49,7 @@ def choose_ship():
     click.echo('                 Please choose which ship you would like')
     for ship in shipList:
         click.echo('Ξ ' + str(shipList.index(ship)) + ' ' + ship + '\n')
-    while True:
-        shipNum = click.prompt('Choose which ship you would like to calculate costs for: ', type = int)
-        if shipNum < 0 or shipNum > (len(shipList) - 1):
-            click.echo('Please enter a number in range.')
-            continue
-        else:
-            break
-
+    shipNum = click.prompt('Choose which ship you would like to calculate costs for: ', type=click.IntRange(0, len(shipList)))
     shipChoice = shipList[int(shipNum)]
     click.echo('You chose the following ship: ' + shipChoice + '\n')
 
