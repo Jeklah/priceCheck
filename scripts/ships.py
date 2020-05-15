@@ -95,7 +95,7 @@ def main(single):
     """
     A ship cost calulator tool for Eve Online. This will query the chosen market
     for the prices of the cost of the parts or minerals it takes to build your chosen
-    ship. Note: It assumes that the blueclick.echo of the ship you're making is fully researched
+    ship. Note: It assumes that the blueprint of the ship you're making is fully researched
     to 10/20. This could be added as an extra feature if there is demand for it.
 
     If you're going to use the single item appraisal and the item has spaces in, please contain
@@ -105,7 +105,7 @@ def main(single):
     marketName = choose_market()
     if single:
         partDetails = get_appraisal(single.lower(), marketName)
-        cost = round(partDetails[1], 2)# To-DO change this index to currAverage.
+        cost = round(partDetails[1], 2)
         click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost))
     else:
         shipName = choose_ship()
