@@ -92,8 +92,8 @@ def ship_parts_cost(shipName, marketName):
     click.echo('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
 
 @click.command()
-@click.option('--single', '-s', help='Find out price of one item. See help for more info.', default=False)
-@click.option('--market', '-m', help='The market you would like to use', default=False)
+@click.option('--single', '-s', help='Find out price of one item. See help for more info.', type=str)
+@click.option('--market', '-m', help='The market you would like to use', type=str )
 def main(single, market):
     """
     A ship cost calulator tool for Eve Online. This will query the chosen market
@@ -107,14 +107,10 @@ def main(single, market):
     welcome()
     if single:
         if market:
-            try:
-                marketName = market
-            except ValueError:
-                click.echo('Please enter a market selection by number.')
-            else:
-                partDetails = get_appraisal(single.lower(), marketName)
-                cost = round(partDetails[ptIndex], 2)
-                click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost) + ' ISK at ' + marketName.capitalize())
+            marketName = market
+            partDetails = get_appraisal(single.lower(), marketName)
+            cost = round(partDetails[ptIndex], 2)
+            click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost) + ' ISK at ' + marketName.capitalize())
         else:
             marketName = choose_market()
             print('here')
