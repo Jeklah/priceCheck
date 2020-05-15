@@ -116,6 +116,8 @@ def main(single, market):
                 cost = round(partDetails[ptIndex], 2)
                 click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost) + ' ISK at ' + marketName.capitalize())
         else:
+            marketName = choose_market()
+            print('here')
             partDetails = get_appraisal(single.lower(), marketName)
             cost = round(partDetails[ptIndex], 2)# To-DO change this index to currAverage.
             click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost) + ' ISK at ' + marketName.capitalize())
