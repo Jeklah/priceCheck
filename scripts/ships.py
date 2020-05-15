@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Ship Cost Calculator CLI tool for Eve Online
 #
 # This is a tool aimed at helping people estimate the costs of building a ship without
@@ -9,6 +10,7 @@
 # Author: Arthur Bowers/Jeklah
 # Date: 10/05/2020
 
+import click
 import requests
 import time
 import os
@@ -18,50 +20,28 @@ shipParts = []      # Initialising the list.
 
 def welcome():
     os.system('clear')
-    print('             Hello and Welcome to Jeklah\'s Ship Cost Calculator' + '\n')
-    print('*** DISCLAIMER *** This tool assumes 10/20 research on bps...for now. *** DISCLAIMER ***')
-    print('             Please choose which market you would like to use: ')
+    click.echo('             Hello and Welcome to Jeklah\'s Ship Cost Calculator' + '\n')
+    click.echo('*** DISCLAIMER *** This tool assumes 10/20 research on bps...for now. *** DISCLAIMER ***')
+    click.echo('             Please choose which market you would like to use: ')
     for mrkt in marketList:
-        print('Ξ ' + str(marketList.index(mrkt)) + ' ' + mrkt.capitalize() + '\n')
+        click.echo('Ξ ' + str(marketList.index(mrkt)) + ' ' + mrkt.capitalize() + '\n')
 
 def choose_market():
-    while True:
-        try:
-            marketChoice = int(input('Choose market by number: '))
-        except ValueError:
-            print('Please enter your choice with numbers, not words.')
-            continue
-        if marketChoice < 0 or marketChoice > (len(marketList) - 1):   # -1 because python len uses a start index of 1
-            print('Please enter a valid number.')
-            continue
-        else:
-            break
+    marketChoice = click.prompt('Please Choose a Market: ', type=click.IntRange(0, len(marketList)))
     marketName = marketList[int(marketChoice)]
-    print('You chose ' + marketName.capitalize())
+    click.echo('You chose ' + marketName.capitalize())
     time.sleep(1.5)
 
     return(marketName)
-
 def choose_ship():
     os.system('clear')
-    print('                              Ship Choice')
-    print('                 Please choose which ship you would like')
+    click.echo('                              Ship Choice')
+    click.echo('                 Please choose which ship you would like')
     for ship in shipList:
-        print('Ξ ' + str(shipList.index(ship)) + ' ' + ship + '\n')
-    while True:
-        try:
-            shipNum = int(input('Choose which ship you would like to calculate costs for: '))
-        except ValueError:
-            print('Please enter numbers not words. Preferably in range.')
-            continue
-        if shipNum < 0 or shipNum > (len(shipList) - 1):
-            print('Please enter a valid number.')
-            continue
-        else:
-            break
-
+        click.echo('Ξ ' + str(shipList.index(ship)) + ' ' + ship + '\n')
+    shipNum = click.prompt('Choose which ship you would like to calculate costs for: ', type=click.IntRange(0, len(shipList)))
     shipChoice = shipList[int(shipNum)]
-    print('You chose the following ship: ' + shipChoice + '\n')
+    click.echo('You chose the following ship: ' + shipChoice + '\n')
 
     return(shipChoice)
 
@@ -103,17 +83,33 @@ def ship_parts_cost(shipName, marketName):
         partCost = partDetails[ptIndex] * float(str(partCount[item]))
         partCost = round(partCost, 2)
         total += partCost
-        print(item + ' costs ' + '{:,}'.format(round(partDetails[ptIndex], 2)) + ' ISK at ' + marketName.capitalize())
-        print('- ' + item + ' x ' + partCount[item] + ' costs: ' + '{:,}'.format(partCost) + ' ISK' + '\n')
+        click.echo(item + ' costs ' + '{:,}'.format(round(partDetails[ptIndex], 2)) + ' ISK at ' + marketName.capitalize())
+        click.echo('- ' + item + ' x ' + partCount[item] + ' costs: ' + '{:,}'.format(partCost) + ' ISK' + '\n')
 
     total = round(total, 2)
-    print('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
+    click.echo('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
 
-def main():
+@click.command()
+@click.option('--single', '-s', help="Find out price of one item. See help for more info.", default=False)
+def main(single):
+    """
+    A ship cost calulator tool for Eve Online. This will query the chosen market
+    for the prices of the cost of the parts or minerals it takes to build your chosen
+    ship. Note: It assumes that the blueclick.echo of the ship you're making is fully researched
+    to 10/20. This could be added as an extra feature if there is demand for it.
+
+    If you're going to use the single item appraisal and the item has spaces in, please contain
+    it within single quotes.
+    """
     welcome()
     marketName = choose_market()
-    shipName = choose_ship()
-    ship_parts_cost(shipName, marketName)
+    if single:
+        partDetails = get_appraisal(single.lower(), marketName)
+        cost = round(partDetails[1], 2)
+        click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost))
+    else:
+        shipName = choose_ship()
+        ship_parts_cost(shipName, marketName)
 
 if __name__ == "__main__":
     main()
