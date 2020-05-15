@@ -105,7 +105,7 @@ def main(single):
     marketName = choose_market()
     if single:
         partDetails = get_appraisal(single.lower(), marketName)
-        cost = round(partDetails[1], 2)
+        cost = round(partDetails[1], 2)# To-DO change this index to currAverage.
         click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost))
     else:
         shipName = choose_ship()
