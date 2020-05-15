@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Ship Cost Calculator CLI tool for Eve Online
 #
 # This is a tool aimed at helping people estimate the costs of building a ship without
@@ -23,12 +23,11 @@ def welcome():
     # os.system('clear')
     click.echo('             Hello and Welcome to Jeklah\'s Ship Cost Calculator' + '\n')
     click.echo('*** DISCLAIMER *** This tool assumes 10/20 research on bps...for now. *** DISCLAIMER ***')
-    click.echo('             Please choose which market you would like to use: ')
-    for mrkt in marketList:
-        click.echo('Ξ ' + str(marketList.index(mrkt)) + ' ' + mrkt.capitalize() + '\n')
 
 #@click.command()
 def choose_market():
+    for mrkt in marketList:
+        click.echo('Ξ ' + str(marketList.index(mrkt)) + ' ' + mrkt.capitalize() + '\n')
     marketChoice = click.prompt('Please Choose a Market: ', type=click.IntRange(0, len(marketList)))
     marketName = marketList[int(marketChoice)]
     click.echo('You chose ' + marketName.capitalize())
@@ -93,8 +92,9 @@ def ship_parts_cost(shipName, marketName):
     click.echo('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
 
 @click.command()
-@click.option('--single', '-s', help="Find out price of one item. See help for more info.", default=False)
-def main(single):
+@click.option('--single', '-s', help='Find out price of one item. See help for more info.', default=False)
+@click.option('--market', '-m', help='The market you would like to use', default=False)
+def main(single, market):
     """
     A ship cost calulator tool for Eve Online. This will query the chosen market
     for the prices of the cost of the parts or minerals it takes to build your chosen
@@ -105,12 +105,22 @@ def main(single):
     it within single quotes.
     """
     welcome()
-    marketName = choose_market()
     if single:
-        partDetails = get_appraisal(single.lower(), marketName)
-        cost = round(partDetails[1], 2)# To-DO change this index to currAverage.
-        click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost))
+        if market:
+            try:
+                marketName = market
+            except ValueError:
+                click.echo('Please enter a market selection by number.')
+            else:
+                partDetails = get_appraisal(single.lower(), marketName)
+                cost = round(partDetails[1], 2)
+                click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost) + ' ISK at ' + marketName.capitalize())
+        else:
+            partDetails = get_appraisal(single.lower(), marketName)
+            cost = round(partDetails[1], 2)# To-DO change this index to currAverage.
+            click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost) + ' ISK at ' + marketName.capitalize())
     else:
+        marketName = choose_market()
         shipName = choose_ship()
         ship_parts_cost(shipName, marketName)
 
