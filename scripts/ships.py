@@ -113,11 +113,11 @@ def main(single, market):
                 click.echo('Please enter a market selection by number.')
             else:
                 partDetails = get_appraisal(single.lower(), marketName)
-                cost = round(partDetails[1], 2)
+                cost = round(partDetails[ptIndex], 2)
                 click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost) + ' ISK at ' + marketName.capitalize())
         else:
             partDetails = get_appraisal(single.lower(), marketName)
-            cost = round(partDetails[1], 2)# To-DO change this index to currAverage.
+            cost = round(partDetails[ptIndex], 2)# To-DO change this index to currAverage.
             click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost) + ' ISK at ' + marketName.capitalize())
     else:
         marketName = choose_market()
