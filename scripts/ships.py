@@ -106,16 +106,20 @@ def ship_parts_cost(shipName, marketName):
     click.echo('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
 
 @click.command()
-@click.option('--single', '-s', help='Find out price of one item. See help for more info.', type=str)
+@click.option('--single', '-s', help='Find out price of a single item. Works with any item!', type=str)
 @click.option('--market', '-m', help='The market you would like to use', type=str )
 def main(single, market):
     """
     A ship cost calulator tool for Eve Online. This will query the chosen market
     for the prices of the cost of the parts or minerals it takes to build your chosen
-    ship. Note: It assumes that the blueprint of the ship you're making is fully researched
+    ship.\n
+    Note: It assumes that the blueprint of the ship you're making is fully researched
     to 10/20. This could be added as an extra feature if there is demand for it.
 
-    If you're going to use the single item appraisal and the item has spaces in, please contain
+    I've added 2 new options.
+
+    These options can be combined for a quick price check at a market.
+    If you're using the single item option and the item has spaces in, please contain
     it within single quotes.
     """
     welcome()
