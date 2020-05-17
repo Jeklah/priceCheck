@@ -4,7 +4,7 @@
 This is a tool aimed to do away with hard to understand, easily breaking spreadsheets to work out
 the cost of building ships and possibly other things in the future.
 
-No knowledge of programming or Python is needed to run this tool. Only the requirements below.  
+__No knowledge of programming or Python is needed to run this tool!__ Only the requirements below.  
 As a FYI, if anyone is interested and/or doesn't know and for some context (may help understanding 'installing and running').  
 Python is a programming language.  
 Git is a source code management tool. Github is an unrelated site to upload git repositories to as backup and
