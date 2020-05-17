@@ -41,9 +41,17 @@ Run the following command to install dependencies
 
 **Using the Tool**  
 Run the script by running the following command from the shipCostCalc folder in cmd.
-You could also run it directly from the scripts folder using `python3 ships.py`.
+You could also run it directly from the scripts folder using `./ships.py`.
 
-`python3 scripts/ships.py`
+`scripts/ships.py`
+
+I've now added a few options as well as a help menu.  
+--help for the help menu. e.g `scripts/ships.py --help`  
+-m or --market to select your market ahead of the menu. e.g `scripts/ships.py -m rens`  
+-s or --single for a single item price check. **__This works with any item!__** just be sure to spell it correctly and if it has
+spaces enclose it in single quotes. e.g `scripts/ships.py -s 'hobgoblin ii'`  
+These options can be used together. e.g `scripts/ships.py -s 'hobgoblin ii' -m rens` for a quick price check. I hope this will
+ be useful for people.
 
 **Notes**  
 `python3` and `pip3` executable name may rely on your version installed.
