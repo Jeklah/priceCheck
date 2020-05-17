@@ -134,7 +134,7 @@ def main(single, market):
         item_check(single)
         marketName = choose_market()
         partDetails = get_appraisal(single, marketName)
-        cost = round(partDetails[minPrice], 2)  # using 2 for index for min price, better for single item price check
+        cost = round(partDetails[minPrice], 2)
         click.echo(single.capitalize() + ' costs + ' + '{:,}'.format(cost) + 'ISK at ' + marketName.capitalize())
     elif single and market:
         check_both(single, market)
