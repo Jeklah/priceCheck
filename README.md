@@ -58,7 +58,7 @@ These options can be used together. e.g `scripts/ships.py -s 'hobgoblin ii' -m r
 
 I hope this will be useful for everyone and not just those wishing to build ships now.
 
-Use the --help flag for help:  
+Use the `--help` flag for help:  
 `scripts/ships.py --help`
 
 **Notes**  
