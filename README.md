@@ -47,7 +47,7 @@ Run it directly using:
 `scripts/ships.py`
 
 If that doesn't work try using python directly:  
-`scripts/ships.py`
+`python3 scripts/ships.py`
 
 I've now added a few options as well as a help menu.  
 `--help` for the help menu. e.g `scripts/ships.py --help`  
