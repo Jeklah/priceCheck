@@ -73,14 +73,15 @@ def item_check(item):
         get_appraisal(item, 'jita')
     except KeyError:
         click.echo('Error: Can\'t find item. Please check spelling.')
-        return True
-
+        #return True
+        exit()
 def market_check(market):
     try:
         get_appraisal('Tritanium 1', market)
     except KeyError:
         click.echo('Error: Can\'t find market. Please check spelling.')
-        return True
+        #return True
+        exit()
 
 def check_both(single, market):
     if item_check(single) and market_check(market):
@@ -130,23 +131,16 @@ def main(single, market):
     """
     welcome()
     if market and not single:
-        marketFlag = market_check(market)
-        if marketFlag is True:
-            exit()
-        else:
-            shipName = choose_ship()
-            ship_parts_cost(shipName, market)
+        market_check(market)
+        shipName = choose_ship()
+        ship_parts_cost(shipName, market)
     elif single and not market:
-        itemFlag = item_check(single)
-        if itemFlag is True:
-            exit()
-        else:
-            marketName = choose_market()
-            partDetails = get_appraisal(single, marketName)
-            cost = round(partDetails[2], 2)  # using 2 for index for min price, better for single item price check
-            click.echo(single.capitalize() + ' costs + ' + '{:,}'.format(cost) + 'ISK at ' + marketName.capitalize())
+        item_check(single)
+        marketName = choose_market()
+        partDetails = get_appraisal(single, marketName)
+        cost = round(partDetails[2], 2)  # using 2 for index for min price, better for single item price check
+        click.echo(single.capitalize() + ' costs + ' + '{:,}'.format(cost) + 'ISK at ' + marketName.capitalize())
     elif single and market:
-        print('check5')
         check_both(single, market)
         partDetails = get_appraisal(single.lower(), market)
         cost = round(partDetails[ptIndex], 2)
