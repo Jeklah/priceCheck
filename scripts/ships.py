@@ -73,6 +73,23 @@ def item_check(item):
         get_appraisal(item, 'jita')
     except KeyError:
         click.echo('Error: Can\'t find item. Please check spelling.')
+        return True
+
+def market_check(market):
+    try:
+        get_appraisal('Tritanium 1', market)
+    except KeyError:
+        click.echo('Error: Can\'t find market. Please check spelling.')
+        return True
+
+def check_both(single, market):
+    if item_check(single) and market_check(market):
+        click.echo('Error: Could not find either the item or market you are searching for.')
+        exit()
+    if item_check(single):
+        print('check')
+        exit()
+    if market_check(market):
         exit()
 
 def ship_parts_cost(shipName, marketName):
@@ -112,33 +129,31 @@ def main(single, market):
     it within single quotes.
     """
     welcome()
-    if market:
-        try:
-            marketName = market
+    if market and not single:
+        marketFlag = market_check(market)
+        if marketFlag is True:
+            exit()
+        else:
             shipName = choose_ship()
-            partDetails = get_appraisal(shipName, market)
-        except KeyError:
-            click.echo('Error: Market not found. Please check spelling and choose from the main trade hubs.')
-    if single:
-        item_check(single)
-        if market:
-            try:
-                marketName = market
-                partDetails = get_appraisal(single.lower(), marketName)
-            except KeyError:
-                click.echo('Invalid market choice. Please check spelling and choose from the main trade hubs.')
-                exit()
-            cost = round(partDetails[ptIndex], 2)
-            click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost) + ' ISK at ' + marketName.capitalize())
+            ship_parts_cost(shipName, market)
+    elif single and not market:
+        itemFlag = item_check(single)
+        if itemFlag is True:
+            exit()
         else:
             marketName = choose_market()
-            print('here')
-            partDetails = get_appraisal(single.lower(), marketName)
-            cost = round(partDetails[ptIndex], 2)# To-DO change this index to currAverage.
-            click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost) + ' ISK at ' + marketName.capitalize())
+            partDetails = get_appraisal(single, marketName)
+            cost = round(partDetails[2], 2)  # using 2 for index for min price, better for single item price check
+            click.echo(single.capitalize() + ' costs + ' + '{:,}'.format(cost) + 'ISK at ' + marketName.capitalize())
+    elif single and market:
+        print('check5')
+        check_both(single, market)
+        partDetails = get_appraisal(single.lower(), market)
+        cost = round(partDetails[ptIndex], 2)
+        click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost) + ' ISK at ' + market.capitalize())
     else:
-        marketName = choose_market()
         shipName = choose_ship()
+        marketName = choose_market()
         ship_parts_cost(shipName, marketName)
 
 if __name__ == "__main__":
