@@ -73,25 +73,17 @@ def item_check(item):
         get_appraisal(item, 'jita')
     except KeyError:
         click.echo('Error: Can\'t find item. Please check spelling.')
-        #return True
         exit()
 def market_check(market):
     try:
         get_appraisal('Tritanium 1', market)
     except KeyError:
         click.echo('Error: Can\'t find market. Please check spelling.')
-        #return True
         exit()
 
 def check_both(single, market):
-    if item_check(single) and market_check(market):
-        click.echo('Error: Could not find either the item or market you are searching for.')
-        exit()
-    if item_check(single):
-        print('check')
-        exit()
-    if market_check(market):
-        exit()
+    item_check(single)
+    market_check(market)
 
 def ship_parts_cost(shipName, marketName):
     for ship in shipList:
