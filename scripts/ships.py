@@ -68,6 +68,13 @@ def get_appraisal(itemName, marketName):
 
     return(partDetails)
 
+def item_check(item):
+    try:
+        get_appraisal(item, 'jita')
+    except KeyError:
+        click.echo('Error: Can\'t find item. Please check spelling.')
+        exit()
+
 def ship_parts_cost(shipName, marketName):
     for ship in shipList:
         if shipName is ship:
@@ -98,17 +105,29 @@ def main(single, market):
     """
     A ship cost calulator tool for Eve Online. This will query the chosen market
     for the prices of the cost of the parts or minerals it takes to build your chosen
-    ship. Note: It assumes that the blueclick.echo of the ship you're making is fully researched
+    ship. Note: It assumes that the blueprint of the ship you're making is fully researched
     to 10/20. This could be added as an extra feature if there is demand for it.
 
     If you're going to use the single item appraisal and the item has spaces in, please contain
     it within single quotes.
     """
     welcome()
-    if single:
-        if market:
+    if market:
+        try:
             marketName = market
-            partDetails = get_appraisal(single.lower(), marketName)
+            shipName = choose_ship()
+            partDetails = get_appraisal(shipName, market)
+        except KeyError:
+            click.echo('Error: Market not found. Please check spelling and choose from the main trade hubs.')
+    if single:
+        item_check(single)
+        if market:
+            try:
+                marketName = market
+                partDetails = get_appraisal(single.lower(), marketName)
+            except KeyError:
+                click.echo('Invalid market choice. Please check spelling and choose from the main trade hubs.')
+                exit()
             cost = round(partDetails[ptIndex], 2)
             click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost) + ' ISK at ' + marketName.capitalize())
         else:
