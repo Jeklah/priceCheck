@@ -54,8 +54,9 @@ I've now added a few options as well as a help menu.
 `-m` or`--market` to select your market ahead of the menu. e.g `scripts/ships.py -m rens`  
 `-s` or `--single` for a single item price check. **__This works with any item!__** Just be sure to spell it correctly and if it has
 spaces enclose it in single quotes. e.g `scripts/ships.py -s 'hobgoblin ii'`  
-These options can be used together. e.g `scripts/ships.py -s 'hobgoblin ii' -m rens` for a quick price check. I hope this will
- be useful for people.
+These options can be used together. e.g `scripts/ships.py -s 'hobgoblin ii' -m rens` for a quick price check. 
+
+I hope this will be useful for everyone and not just those wishing to build ships now.
 
 Use the --help flag for help:  
 `scripts/ships.py --help`
