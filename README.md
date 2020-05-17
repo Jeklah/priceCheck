@@ -52,7 +52,7 @@ If that doesn't work try using python directly:
 I've now added a few options as well as a help menu.  
 `--help` for the help menu. e.g `scripts/ships.py --help`  
 `-m` or`--market` to select your market ahead of the menu. e.g `scripts/ships.py -m rens`  
-`-s` or `--single` for a single item price check. **__This works with any item!__** just be sure to spell it correctly and if it has
+`-s` or `--single` for a single item price check. **__This works with any item!__** Just be sure to spell it correctly and if it has
 spaces enclose it in single quotes. e.g `scripts/ships.py -s 'hobgoblin ii'`  
 These options can be used together. e.g `scripts/ships.py -s 'hobgoblin ii' -m rens` for a quick price check. I hope this will
  be useful for people.
