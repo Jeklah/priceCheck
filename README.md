@@ -1,4 +1,4 @@
-# Ship Cost Calculator  
+# Item Check/Ship Cost Calculator  
 
 **Introduction**  
 This is a tool aimed to do away with hard to understand, easily breaking spreadsheets to work out
