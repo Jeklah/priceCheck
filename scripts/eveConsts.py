@@ -8,6 +8,7 @@ ptIndex = 1     # Index for the indicator value of partindex in shipPartCounts
 countIndex = 1  # Index for the indicator value of countindex in shipPartCounts
 shipIndex = 0   # Index for the name of the ship in shipPartCounts
 partIndex = 2   # Index for when partIndex is 2 in shipPartCounts.
+minPrice = 2    # Index for minimum price at a market.i
 shipList = []   # Initalising shipList.
 
 oreList = [
