@@ -71,6 +71,7 @@ def item_check(item):
     except KeyError:
         click.echo('Error: Can\'t find item. Please check spelling.')
         exit()
+
 def market_check(market):
     try:
         get_appraisal('Tritanium', market)
