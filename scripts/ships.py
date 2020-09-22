@@ -107,6 +107,7 @@ def ship_parts_cost(shipName, marketName):
     click.echo('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
 
 @click.command()
+@click.option('--compare', '-c', help='Compare the prices of an item at all teading hubs.', type=str)
 @click.option('--single', '-s', help='Find out price of a single item. Works with any item!', type=str)
 @click.option('--market', '-m', help='The market you would like to use', type=str )
 def main(single, market):
@@ -125,6 +126,10 @@ def main(single, market):
     it within single quotes.
     """
     welcome()
+
+    if compare:
+        item_check(single)
+
 
     if market and not single:
         market_check(market)
