@@ -32,6 +32,7 @@ def choose_market():
     # time.sleep(1.5)
 
     return(marketName)
+
 def choose_ship():
     # os.system('clear')
     click.echo('                              Ship Choice')
