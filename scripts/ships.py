@@ -19,7 +19,7 @@ from eveConsts import shipList, marketList, capitalPartsList, oreList, shipPartC
 shipParts = []      # Initialising the list.
 
 def welcome():
-    #os.system('clear')
+    # os.system('clear')
     click.echo('             Hello and Welcome to Jeklah\'s Ship Cost Calculator' + '\n')
     click.echo('*** DISCLAIMER *** This tool assumes 10/20 research on bps...for now. *** DISCLAIMER ***')
 
@@ -29,11 +29,12 @@ def choose_market():
     marketChoice = click.prompt('Please Choose a Market: ', type=click.IntRange(0, len(marketList)))
     marketName = marketList[int(marketChoice)]
     click.echo('You chose ' + marketName.capitalize())
-    time.sleep(1.5)
+    # time.sleep(1.5)
 
     return(marketName)
+
 def choose_ship():
-    #os.system('clear')
+    # os.system('clear')
     click.echo('                              Ship Choice')
     click.echo('                 Please choose which ship you would like')
     for ship in shipList:
@@ -107,9 +108,10 @@ def ship_parts_cost(shipName, marketName):
     click.echo('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
 
 @click.command()
+@click.option('--compare', '-c', help='Compare the prices of an item at all trading hubs.', type=str)
 @click.option('--single', '-s', help='Find out price of a single item. Works with any item!', type=str)
 @click.option('--market', '-m', help='The market you would like to use', type=str )
-def main(single, market):
+def main(single, market, compare):
     """
     A ship cost calulator tool for Eve Online. This will query the chosen market
     for the prices of the cost of the parts or minerals it takes to build your chosen
@@ -126,7 +128,13 @@ def main(single, market):
     """
     welcome()
 
-    if market and not single:
+    if compare:
+        item_check(compare)
+        for mrkt in marketList:
+            partDetails = get_appraisal(compare, mrkt)
+            cost = round(partDetails[minPrice], 2)
+            click.echo(compare.capitalize() + ' costs ' + '{:,}'.format(cost) + 'ISK at ' + mrkt.capitalize())
+    elif market and not single:
         market_check(market)
         shipName = choose_ship()
         ship_parts_cost(shipName, market)
