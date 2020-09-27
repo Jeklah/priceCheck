@@ -129,11 +129,11 @@ def main(single, market, compare):
     welcome()
 
     if compare:
-        item_check(single)
+        item_check(compare)
         for mrkt in marketList:
-            partDetails = get_appraisal(single, mrkt)
+            partDetails = get_appraisal(compare, mrkt)
             cost = round(partDetails[minPrice], 2)
-            click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost) + 'ISK at ' + mrkt.capitalize())
+            click.echo(compare.capitalize() + ' costs ' + '{:,}'.format(cost) + 'ISK at ' + mrkt.capitalize())
     elif market and not single:
         market_check(market)
         shipName = choose_ship()
