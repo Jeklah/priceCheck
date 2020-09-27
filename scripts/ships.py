@@ -19,7 +19,7 @@ from eveConsts import shipList, marketList, capitalPartsList, oreList, shipPartC
 shipParts = []      # Initialising the list.
 
 def welcome():
-    os.system('clear')
+    # os.system('clear')
     click.echo('             Hello and Welcome to Jeklah\'s Ship Cost Calculator' + '\n')
     click.echo('*** DISCLAIMER *** This tool assumes 10/20 research on bps...for now. *** DISCLAIMER ***')
 
@@ -29,11 +29,11 @@ def choose_market():
     marketChoice = click.prompt('Please Choose a Market: ', type=click.IntRange(0, len(marketList)))
     marketName = marketList[int(marketChoice)]
     click.echo('You chose ' + marketName.capitalize())
-    time.sleep(1.5)
+    # time.sleep(1.5)
 
     return(marketName)
 def choose_ship():
-    os.system('clear')
+    # os.system('clear')
     click.echo('                              Ship Choice')
     click.echo('                 Please choose which ship you would like')
     for ship in shipList:
