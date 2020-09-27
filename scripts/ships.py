@@ -19,7 +19,11 @@ from eveConsts import shipList, marketList, capitalPartsList, oreList, shipPartC
 shipParts = []      # Initialising the list.
 
 def welcome():
+<<<<<<< HEAD
 #    os.system('clear')
+=======
+    # os.system('clear')
+>>>>>>> 63c36cce5bb71db895285bd34e830574a2552aa2
     click.echo('             Hello and Welcome to Jeklah\'s Ship Cost Calculator' + '\n')
     click.echo('*** DISCLAIMER *** This tool assumes 10/20 research on bps...for now. *** DISCLAIMER ***')
 
@@ -29,11 +33,16 @@ def choose_market():
     marketChoice = click.prompt('Please Choose a Market: ', type=click.IntRange(0, len(marketList)))
     marketName = marketList[int(marketChoice)]
     click.echo('You chose ' + marketName.capitalize())
-    time.sleep(1.5)
+    # time.sleep(1.5)
 
     return(marketName)
+
 def choose_ship():
+<<<<<<< HEAD
 #    os.system('clear')
+=======
+    # os.system('clear')
+>>>>>>> 63c36cce5bb71db895285bd34e830574a2552aa2
     click.echo('                              Ship Choice')
     click.echo('                 Please choose which ship you would like')
     for ship in shipList:
@@ -97,19 +106,20 @@ def ship_parts_cost(shipName, marketName):
     partCount = dict(zip(shipParts, shipPartCounts[shipList.index(shipName)][partIndex][countIndex::]))
     for item in partCount:
         partDetails = get_appraisal(item, marketName)
-        partCost = partDetails[minPrice] * float(str(partCount[item]))
+        partCost = partDetails[maxPrice] * float(str(partCount[item]))
         partCost = round(partCost, 2)
         total += partCost
-        click.echo(item + ' costs ' + '{:,}'.format(round(partDetails[minPrice], 2)) + ' ISK at ' + marketName.capitalize())
+        click.echo(item + ' costs ' + '{:,}'.format(round(partDetails[maxPrice], 2)) + ' ISK at ' + marketName.capitalize())
         click.echo('- ' + item + ' x ' + partCount[item] + ' costs: ' + '{:,}'.format(partCost) + ' ISK' + '\n')
 
     total = round(total, 2)
     click.echo('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
 
 @click.command()
+@click.option('--compare', '-c', help='Compare the prices of an item at all trading hubs.', type=str)
 @click.option('--single', '-s', help='Find out price of a single item. Works with any item!', type=str)
 @click.option('--market', '-m', help='The market you would like to use', type=str )
-def main(single, market):
+def main(single, market, compare):
     """
     A ship cost calulator tool for Eve Online. This will query the chosen market
     for the prices of the cost of the parts or minerals it takes to build your chosen
@@ -118,7 +128,7 @@ def main(single, market):
     Note: It assumes that the blueprint of the ship you're making is fully researched
     to 10/20. This could be added as an extra feature if there is demand for it.
 
-    I've added 2 new options.
+    I've added 3 new options.
 
     These options can be combined for a quick price check at a market.
     If you're using the single item option and the item has spaces in, please contain
@@ -126,7 +136,13 @@ def main(single, market):
     """
     welcome()
 
-    if market and not single:
+    if compare:
+        item_check(compare)
+        for mrkt in marketList:
+            partDetails = get_appraisal(compare, mrkt)
+            cost = round(partDetails[minPrice], 2)
+            click.echo(compare.capitalize() + ' costs ' + '{:,}'.format(cost) + ' ISK at ' + mrkt.capitalize())
+    elif market and not single:
         market_check(market)
         shipName = choose_ship()
         ship_parts_cost(shipName, market)
@@ -134,12 +150,12 @@ def main(single, market):
         item_check(single)
         marketName = choose_market()
         partDetails = get_appraisal(single, marketName)
-        cost = round(partDetails[minPrice], 2)
+        cost = round(partDetails[maxPrice], 2)
         click.echo(single.capitalize() + ' costs + ' + '{:,}'.format(cost) + 'ISK at ' + marketName.capitalize())
     elif single and market:
         check_both(single, market)
         partDetails = get_appraisal(single.lower(), market)
-        cost = round(partDetails[minPrice], 2)
+        cost = round(partDetails[maxPrice], 2)
         click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost) + ' ISK at ' + market.capitalize())
     else:
         shipName = choose_ship()
