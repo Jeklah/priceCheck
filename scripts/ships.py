@@ -118,7 +118,7 @@ def main(single, market):
     Note: It assumes that the blueprint of the ship you're making is fully researched
     to 10/20. This could be added as an extra feature if there is demand for it.
 
-    I've added 2 new options.
+    I've added 3 new options.
 
     These options can be combined for a quick price check at a market.
     If you're using the single item option and the item has spaces in, please contain
@@ -134,12 +134,12 @@ def main(single, market):
         item_check(single)
         marketName = choose_market()
         partDetails = get_appraisal(single, marketName)
-        cost = round(partDetails[minPrice], 2)
+        cost = round(partDetails[maxPrice], 2)
         click.echo(single.capitalize() + ' costs + ' + '{:,}'.format(cost) + 'ISK at ' + marketName.capitalize())
     elif single and market:
         check_both(single, market)
         partDetails = get_appraisal(single.lower(), market)
-        cost = round(partDetails[minPrice], 2)
+        cost = round(partDetails[maxPrice], 2)
         click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost) + ' ISK at ' + market.capitalize())
     else:
         shipName = choose_ship()
