@@ -97,10 +97,10 @@ def ship_parts_cost(shipName, marketName):
     partCount = dict(zip(shipParts, shipPartCounts[shipList.index(shipName)][partIndex][countIndex::]))
     for item in partCount:
         partDetails = get_appraisal(item, marketName)
-        partCost = partDetails[minPrice] * float(str(partCount[item]))
+        partCost = partDetails[maxPrice] * float(str(partCount[item]))
         partCost = round(partCost, 2)
         total += partCost
-        click.echo(item + ' costs ' + '{:,}'.format(round(partDetails[minPrice], 2)) + ' ISK at ' + marketName.capitalize())
+        click.echo(item + ' costs ' + '{:,}'.format(round(partDetails[maxPrice], 2)) + ' ISK at ' + marketName.capitalize())
         click.echo('- ' + item + ' x ' + partCount[item] + ' costs: ' + '{:,}'.format(partCost) + ' ISK' + '\n')
 
     total = round(total, 2)
