@@ -1,70 +1,91 @@
 #!/usr/bin/env python3
 # Ship Cost Calculator CLI tool for Eve Online
 #
-# This is a tool aimed at helping people estimate the costs of building a ship without
-# the use of complicated spreadsheets that seem to break regularly, aren't easy to maintain and
-# hard to use/understand.
+# This is a tool aimed at helping people estimate the costs of building
+# a ship without the use of complicated spreadsheets that seem
+# to break regularly, aren't easy to maintain and hard to use/understand.
 #
-# This tool aims to solve all of that by being easy to use, maintain and easily expandable.
+# This tool aims to solve all of that by being easy to use, maintain and
+# easily expandable.
 #
 # Author: Arthur Bowers/Jeklah
 # Date: 10/05/2020
 
 import click
 import requests
-import time
-import os
-from eveConsts import shipList, marketList, capitalPartsList, oreList, shipPartCounts, partIndex, ptIndex, countIndex, minPrice
+from eveConsts import (shipList,
+                       marketList,
+                       capitalPartsList,
+                       oreList,
+                       materials,
+                       partIndex,
+                       ptIndex,
+                       countIndex,
+                       minPrice)
 
 shipParts = []      # Initialising the list.
 
-def welcome():
+
+def welcome_msg():
     # os.system('clear')
-    click.echo('             Hello and Welcome to Jeklah\'s Ship Cost Calculator' + '\n')
-    click.echo('*** DISCLAIMER *** This tool assumes 10/20 research on bps...for now. *** DISCLAIMER ***')
+    welcome = ' '*13 + 'Hello and Welcome to Jeklah\'s Ship Cost Calculator'
+    click.echo((welcome) + '\n')
+    presufix = '*** DISCLAIMER ***'
+    disclaim = f'{presufix}This tool assumes 10/20 research on bps.{presufix}'
+    click.echo(disclaim)
+
 
 def choose_market():
     for mrkt in marketList:
-        click.echo('Ξ ' + str(marketList.index(mrkt)) + ' ' + mrkt.capitalize() + '\n')
-    marketChoice = click.prompt('Please Choose a Market: ', type=click.IntRange(0, len(marketList)))
+        market_menu = f'Ξ {str(marketList.index(mrkt))} {mrkt.capitalize()}\n'
+        click.echo(market_menu)
+    mrkt_nums = click.IntRange(0, len(marketList))
+    marketChoice = click.prompt('Please Choose a Market: ', type=mrkt_nums)
     marketName = marketList[int(marketChoice)]
-    click.echo('You chose ' + marketName.capitalize())
+    click.echo(f'You chose {marketName.capitalize()}')
     # time.sleep(1.5)
-
     return(marketName)
+
 
 def choose_ship():
     # os.system('clear')
     click.echo('                              Ship Choice')
     click.echo('                 Please choose which ship you would like')
     for ship in shipList:
-        click.echo('Ξ ' + str(shipList.index(ship)) + ' ' + ship + '\n')
-    shipNum = click.prompt('Choose which ship you would like to calculate costs for: ', type=click.IntRange(0, len(shipList)))
+        click.echo(f'Ξ {str(shipList.index(ship))} {ship}' + '\n')
+    shipNbrs = (click.IntRange(0, len(shipList)))
+    chooseShip = 'Choose which ship you would like to calculate costs for: '
+    shipNum = click.prompt(chooseShip, type=shipNbrs)
     shipChoice = shipList[int(shipNum)]
-    click.echo('You chose the following ship: ' + shipChoice + '\n')
+    click.echo(f'You chose the following ship: {shipChoice}' + '\n')
 
     return(shipChoice)
 
+
 def get_appraisal(itemName, marketName):
     url = 'https://www.evepraisal.com/appraisal'
+    # new url for update evepraisal api
+    url = 'https://www.evepraisal.com/appraisal/structured.json'
+    payload = {'raw_textarea': f'{itemName} 1', 'market': marketName}
+    # new payload for updated evepraisal api
     payload = {
-        'raw_textarea': itemName + ' 1',
-        'market': marketName,
+            "market_name": marketName,
+            "items": [{"name": itemName}]
     }
-
+    # after this point still needs updating.
+    # see ipython history for details.
     req = requests.post(url, params=payload)
-    appraisal_id  = req.headers['X-Appraisal-Id']
-    appraisal_url = 'https://www.evepraisal.com/a/{}.json'.format(appraisal_id)
+    appraisal_id = req.headers['X-Appraisal-Id']
+    appraisal_url = f'https://www.evepraisal.com/a/{appraisal_id}.json'
     result = requests.get(appraisal_url).json()
 
     itemName = result['items'][0]['name']
-    currAvg  = result['items'][0]['prices']['sell']['avg']
+    currAvg = result['items'][0]['prices']['sell']['avg']
     minPrice = result['items'][0]['prices']['sell']['min']
     maxPrice = result['items'][0]['prices']['sell']['max']
 
-    partDetails = [itemName, currAvg, minPrice, maxPrice]
+    return [itemName, currAvg, minPrice, maxPrice]
 
-    return(partDetails)
 
 def item_check(item):
     try:
@@ -73,6 +94,7 @@ def item_check(item):
         click.echo('Error: Can\'t find item. Please check spelling.')
         exit()
 
+
 def market_check(market):
     try:
         get_appraisal('Tritanium', market)
@@ -80,32 +102,40 @@ def market_check(market):
         click.echo('Error: Can\'t find market. Please check spelling.')
         exit()
 
+
 def check_both(single, market):
     item_check(single)
     market_check(market)
 
+
 def ship_parts_cost(shipName, marketName):
+    isk = ' ISK' + '\n'
+    prtTotals = materials[shipList.index(shipName)][ptIndex][countIndex::]
+    cost = (materials[shipList.index(shipName)][ptIndex][0] == 'oreIndex')
     for ship in shipList:
         if shipName is ship:
-            for x in shipPartCounts[shipList.index(shipName)][ptIndex][countIndex::]:
-                if shipPartCounts[shipList.index(shipName)][ptIndex][0] == 'oreIndex':
+            for x in prtTotals:
+                if cost:
                     shipParts.append(oreList[int(x)])
                 else:
                     shipParts.append(capitalPartsList[int(x)])
             break
 
     total = 0
-    partCount = dict(zip(shipParts, shipPartCounts[shipList.index(shipName)][partIndex][countIndex::]))
-    for item in partCount:
+    partCount = materials[shipList.index(shipName)][partIndex][countIndex::]
+    shipPartCount = dict(zip(shipParts, partCount))
+    for item in shipPartCount:
         partDetails = get_appraisal(item, marketName)
-        partCost = partDetails[maxPrice] * float(str(partCount[item]))
+        partCost = partDetails[maxPrice] * float(str(shipPartCount[item]))
         partCost = round(partCost, 2)
         total += partCost
-        click.echo(item + ' costs ' + '{:,}'.format(round(partDetails[maxPrice], 2)) + ' ISK at ' + marketName.capitalize())
-        click.echo('- ' + item + ' x ' + partCount[item] + ' costs: ' + '{:,}'.format(partCost) + ' ISK' + '\n')
+        partMax = 'costs {:,}'.format(round(partDetails[maxPrice], 2))
+        click.echo(f'{item} {partMax}' + 'f ISK at {marketName.capitalize()}')
+        click.echo(f'-{item}x{shipPartCount[item]} costs: ' + '{:,}'.format(partCost) + isk)
 
     total = round(total, 2)
     click.echo('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
+
 
 @click.command()
 @click.option('--compare', '-c', help='Compare the prices of an item at all trading hubs.', type=str)
@@ -126,7 +156,7 @@ def main(single, market, compare):
     If you're using the single item option and the item has spaces in, please contain
     it within single quotes.
     """
-    welcome()
+    welcome_msg()
 
     if compare:
         item_check(compare)
@@ -153,6 +183,7 @@ def main(single, market, compare):
         shipName = choose_ship()
         marketName = choose_market()
         ship_parts_cost(shipName, marketName)
+
 
 if __name__ == "__main__":
     main()
