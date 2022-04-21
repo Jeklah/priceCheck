@@ -6,11 +6,8 @@
 
 ptIndex = 1     # Index for the indicator value of partindex in shipPartCounts
 countIndex = 1  # Index for the indicator value of countindex in shipPartCounts
-shipIndex = 0   # Index for the name of the ship in shipPartCounts
 partIndex = 2   # Index for when partIndex is 2 in shipPartCounts.
 minPrice = 2    # Index for minimum price at a market.i
-shipList = []   # Initalising shipList.
-
 oreList = [
             'Tritanium',
             'Pyerite',
@@ -58,5 +55,5 @@ shipPartCounts = [
     (('Rorqual'), ('partIndex', '0', '1', '2', '9', '3', '4', '5', '10', '11', '12', '8', '6', '13', '7'), ('count', '7', '10', '20', '30', '30', '40', '16', '6', '10', '10', '9', '9', '9', '30')),
 ]
 
-for ship in shipPartCounts:
-    shipList.append(ship[shipIndex])
+shipIndex = 0
+shipList = [ship[shipIndex] for ship in shipPartCounts]
