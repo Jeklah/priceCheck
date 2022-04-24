@@ -17,7 +17,6 @@ from eveConsts import (shipList,
                        marketList,
                        capitalPartsList,
                        oreList,
-                       materials,
                        partIndex,
                        ptIndex,
                        countIndex,
@@ -63,28 +62,27 @@ def choose_ship():
 
 
 def get_appraisal(itemName, marketName):
-    url = 'https://www.evepraisal.com/appraisal'
     # new url for update evepraisal api
+    headers = {'Content-Type': 'application/x-www-form-urlencoded'}
     url = 'https://www.evepraisal.com/appraisal/structured.json'
-    payload = {'raw_textarea': f'{itemName} 1', 'market': marketName}
     # new payload for updated evepraisal api
     payload = {
             "market_name": marketName,
-            "items": [{"name": itemName}]
+            "items": [{"name": itemName, "quantity": 1}]
     }
     # after this point still needs updating.
     # see ipython history for details.
-    req = requests.post(url, params=payload)
-    appraisal_id = req.headers['X-Appraisal-Id']
-    appraisal_url = f'https://www.evepraisal.com/a/{appraisal_id}.json'
-    result = requests.get(appraisal_url).json()
+    req = requests.post(url, headers=headers, data=payload)
+    click.echo(req)
+    #appraisal_url = f'https://www.evepraisal.com/a/{appraisal_id}.json'
+    #result = requests.get(appraisal_url).json()
 
-    itemName = result['items'][0]['name']
-    currAvg = result['items'][0]['prices']['sell']['avg']
-    minPrice = result['items'][0]['prices']['sell']['min']
-    maxPrice = result['items'][0]['prices']['sell']['max']
+    #itemName = result['items'][0]['name']
+    #currAvg = result['items'][0]['prices']['sell']['avg']
+    #minPrice = result['items'][0]['prices']['sell']['min']
+    #maxPrice = result['items'][0]['prices']['sell']['max']
 
-    return [itemName, currAvg, minPrice, maxPrice]
+    #return [itemName, currAvg, minPrice, maxPrice]
 
 
 def item_check(item):
@@ -108,33 +106,33 @@ def check_both(single, market):
     market_check(market)
 
 
-def ship_parts_cost(shipName, marketName):
-    isk = ' ISK' + '\n'
-    prtTotals = materials[shipList.index(shipName)][ptIndex][countIndex::]
-    cost = (materials[shipList.index(shipName)][ptIndex][0] == 'oreIndex')
-    for ship in shipList:
-        if shipName is ship:
-            for x in prtTotals:
-                if cost:
-                    shipParts.append(oreList[int(x)])
-                else:
-                    shipParts.append(capitalPartsList[int(x)])
-            break
-
-    total = 0
-    partCount = materials[shipList.index(shipName)][partIndex][countIndex::]
-    shipPartCount = dict(zip(shipParts, partCount))
-    for item in shipPartCount:
-        partDetails = get_appraisal(item, marketName)
-        partCost = partDetails[maxPrice] * float(str(shipPartCount[item]))
-        partCost = round(partCost, 2)
-        total += partCost
-        partMax = 'costs {:,}'.format(round(partDetails[maxPrice], 2))
-        click.echo(f'{item} {partMax}' + 'f ISK at {marketName.capitalize()}')
-        click.echo(f'-{item}x{shipPartCount[item]} costs: ' + '{:,}'.format(partCost) + isk)
-
-    total = round(total, 2)
-    click.echo('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
+# def ship_parts_cost(shipName, marketName):
+#     isk = ' ISK' + '\n'
+#     prtTotals = materials[shipList.index(shipName)][ptIndex][countIndex::]
+#     cost = (materials[shipList.index(shipName)][ptIndex][0] == 'oreIndex')
+#     for ship in shipList:
+#         if shipName is ship:
+#             for x in prtTotals:
+#                 if cost:
+#                     shipParts.append(oreList[int(x)])
+#                 else:
+#                     shipParts.append(capitalPartsList[int(x)])
+#             break
+# 
+#     total = 0
+#     partCount = materials[shipList.index(shipName)][partIndex][countIndex::]
+#     shipPartCount = dict(zip(shipParts, partCount))
+#     for item in shipPartCount:
+#         partDetails = get_appraisal(item, marketName)
+#         partCost = partDetails[maxPrice] * float(str(shipPartCount[item]))
+#         partCost = round(partCost, 2)
+#         total += partCost
+#         partMax = 'costs {:,}'.format(round(partDetails[maxPrice], 2))
+#         click.echo(f'{item} {partMax}' + 'f ISK at {marketName.capitalize()}')
+#         click.echo(f'-{item}x{shipPartCount[item]} costs: ' + '{:,}'.format(partCost) + isk)
+# 
+#     total = round(total, 2)
+#     click.echo('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
 
 
 @click.command()
@@ -182,7 +180,7 @@ def main(single, market, compare):
     else:
         shipName = choose_ship()
         marketName = choose_market()
-        ship_parts_cost(shipName, marketName)
+        get_appraisal(shipName, marketName)
 
 
 if __name__ == "__main__":
