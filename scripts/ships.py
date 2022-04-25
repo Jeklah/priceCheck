@@ -66,7 +66,7 @@ def get_appraisal(itemName, marketName):
     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
     url = 'https://www.evepraisal.com/appraisal/structured.json'
     # new payload for updated evepraisal api
-    payload = '{"market_name": "jita", "items": [{"name": "tayra", "quantity": 1}]}'
+    payload = '{"market_name":"'+ marketName+ '","items": [{"name": "tayra", "quantity": 1}]}'
     # after this point still needs updating.
     # see ipython history for details.
     req = requests.post(url, headers=headers, data=payload)
