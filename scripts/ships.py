@@ -112,6 +112,12 @@ def check_both(single, market):
     market_check(market)
 
 
+# ships_parts_cost never had a materials variable. i must have been trying
+# to implement working out the cost of materials as well and hadn't added
+# it to eveConsts yet. see backup file in projects folder for original
+# function.
+
+
 # def ship_parts_cost(shipName, marketName):
 #     isk = ' ISK' + '\n'
 #     prtTotals = materials[shipList.index(shipName)][ptIndex][countIndex::]
