@@ -13,6 +13,7 @@
 
 import click
 import requests
+import json
 from eveConsts import (shipList,
                        marketList,
                        capitalPartsList,
@@ -72,14 +73,22 @@ def get_appraisal(itemName, marketName):
     req = requests.post(url, headers=headers, data=payload)
     click.echo(payload)
     click.echo(req)
-    click.echo(req.content) #appraisal_url = f'https://www.evepraisal.com/a/{appraisal_id}.json' #result = requests.get(appraisal_url).json()
+    json_result = json.loads(req.content)
+    click.echo(type(json_result))
+    appraisal = json_result['appraisal']
+    itemName = appraisal['items'][0]['name']
+    currAvg = appraisal['items'][0]['prices']['sell']['avg']
+    minPrice = appraisal['items'][0]['prices']['sell']['min']
+    maxPrice = appraisal['items'][0]['prices']['sell']['max']
+    click.echo(itemName)
+    click.echo(f'current average for {itemName} at {marketName} is {currAvg:,.2f} ISK.')
 
-    #itemName = result['items'][0]['name']
-    #currAvg = result['items'][0]['prices']['sell']['avg']
-    #minPrice = result['items'][0]['prices']['sell']['min']
-    #maxPrice = result['items'][0]['prices']['sell']['max']
 
-    #return [itemName, currAvg, minPrice, maxPrice]
+
+    # appraisal_url = f'https://www.evepraisal.com/a/{appraisal_id}.json' #result = requests.get(appraisal_url).json()
+    # itemName = result['items'][0]['name']
+
+    return [itemName, currAvg, minPrice, maxPrice]
 
 
 def item_check(item):
@@ -162,7 +171,7 @@ def main(single, market, compare):
     elif market and not single:
         market_check(market)
         shipName = choose_ship()
-        ship_parts_cost(shipName, market)
+        get_appraisal(shipName, market)
     elif single and not market:
         item_check(single)
         marketName = choose_market()
