@@ -118,33 +118,33 @@ def check_both(single, market):
 # function.
 
 
-# def ship_parts_cost(shipName, marketName):
-#     isk = ' ISK' + '\n'
-#     prtTotals = materials[shipList.index(shipName)][ptIndex][countIndex::]
-#     cost = (materials[shipList.index(shipName)][ptIndex][0] == 'oreIndex')
-#     for ship in shipList:
-#         if shipName is ship:
-#             for x in prtTotals:
-#                 if cost:
-#                     shipParts.append(oreList[int(x)])
-#                 else:
-#                     shipParts.append(capitalPartsList[int(x)])
-#             break
-# 
-#     total = 0
-#     partCount = materials[shipList.index(shipName)][partIndex][countIndex::]
-#     shipPartCount = dict(zip(shipParts, partCount))
-#     for item in shipPartCount:
-#         partDetails = get_appraisal(item, marketName)
-#         partCost = partDetails[maxPrice] * float(str(shipPartCount[item]))
-#         partCost = round(partCost, 2)
-#         total += partCost
-#         partMax = 'costs {:,}'.format(round(partDetails[maxPrice], 2))
-#         click.echo(f'{item} {partMax}' + 'f ISK at {marketName.capitalize()}')
-#         click.echo(f'-{item}x{shipPartCount[item]} costs: ' + '{:,}'.format(partCost) + isk)
-# 
-#     total = round(total, 2)
-#     click.echo('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
+def ship_parts_cost(shipName, marketName):
+    isk = ' ISK' + '\n'
+    # prtTotals = materials[shipList.index(shipName)][ptIndex][countIndex::]
+    # cost = (materials[shipList.index(shipName)][ptIndex][0] == 'oreIndex')
+    for ship in shipList:
+        if shipName is ship:
+            for x in shipPartsCounts[shipList.index(shipName)][ptIndex][countIndex::]:
+                if shipPartsCounts[shipList.index(shipName)][ptIndex][0] == 'oreIndex':
+                    shipParts.append(oreList[int(x)])
+                else:
+                    shipParts.append(capitalPartsList[int(x)])
+            break
+
+    total = 0
+    # partCount = materials[shipList.index(shipName)][partIndex][countIndex::]
+    shipPartCount = dict(zip(shipParts, partCount))
+    for item in shipPartCount:
+        partDetails = get_appraisal(item, marketName)
+        partCost = partDetails[maxPrice] * float(str(shipPartCount[item]))
+        partCost = round(partCost, 2)
+        total += partCost
+        partMax = 'costs {:,}'.format(round(partDetails[maxPrice], 2))
+        click.echo(f'{item} {partMax}' + 'f ISK at {marketName.capitalize()}')
+        click.echo(f'-{item}x{shipPartCount[item]} costs: ' + '{:,}'.format(partCost) + isk)
+
+    total = round(total, 2)
+    click.echo('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
 
 
 @click.command()
