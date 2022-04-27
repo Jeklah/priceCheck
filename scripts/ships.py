@@ -71,17 +71,13 @@ def get_appraisal(itemName, marketName):
     payload = '{"market_name":"' + marketName + \
               '","items": [{"name": "' + itemName + '", "quantity": 1}]}'
     req = requests.post(url, headers=headers, data=payload)
-    # click.echo(payload)
-    # click.echo(req)
     json_result = json.loads(req.content)
-    # click.echo(type(json_result))
     appraisal = json_result['appraisal']
 
     itemName = appraisal['items'][0]['name']
     currAvg = appraisal['items'][0]['prices']['sell']['avg']
     minPrice = appraisal['items'][0]['prices']['sell']['min']
     maxPrice = appraisal['items'][0]['prices']['sell']['max']
-    # click.echo(itemName)
 
     return [itemName, currAvg, minPrice, maxPrice]
 
@@ -107,16 +103,8 @@ def check_both(single, market):
     market_check(market)
 
 
-# ships_parts_cost never had a materials variable. i must have been trying
-# to implement working out the cost of materials as well and hadn't added
-# it to eveConsts yet. see backup file in projects folder for original
-# function.
-
-
 def ship_parts_cost(shipName, marketName):
     isk = ' ISK' + '\n'
-    # prtTotals = materials[shipList.index(shipName)][ptIndex][countIndex::]
-    # cost = (materials[shipList.index(shipName)][ptIndex][0] == 'oreIndex')
     for ship in shipList:
         if shipName is ship:
             for x in shipPartCounts[shipList.index(shipName)][ptIndex][countIndex::]:
@@ -181,7 +169,7 @@ def main(single, market, compare):
         partDetails = get_appraisal(single, marketName)
         cost = round(partDetails[3], 2)
         click.echo(
-                f'{single.capitalize()} costs {cost:,.2f} ISK at {marketName.capitalize()}'
+            f'{single.capitalize()} costs {cost:,.2f} ISK at {marketName.capitalize()}'
         )
     elif single and market:
         check_both(single, market)
