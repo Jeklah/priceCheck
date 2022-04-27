@@ -168,7 +168,9 @@ def main(single, market, compare):
         for mrkt in marketList:
             partDetails = get_appraisal(compare, mrkt)
             cost = round(partDetails[minPrice], 2)
-            click.echo(compare.capitalize() + ' costs ' + '{:,}'.format(cost) + ' ISK at ' + mrkt.capitalize())
+            click.echo(
+                    f'{compare.capitalize()} costs {cost:,.2f} ISK at {mrkt.capitalize()}'
+            )
     elif market and not single:
         market_check(market)
         shipName = choose_ship()
@@ -178,12 +180,16 @@ def main(single, market, compare):
         marketName = choose_market()
         partDetails = get_appraisal(single, marketName)
         cost = round(partDetails[3], 2)
-        click.echo(single.capitalize() + ' costs + ' + '{:,}'.format(cost) + 'ISK at ' + marketName.capitalize())
+        click.echo(
+                f'{single.capitalize()} costs {cost:,.2f} ISK at {marketName.capitalize()}'
+        )
     elif single and market:
         check_both(single, market)
         partDetails = get_appraisal(single.lower(), market)
         cost = round(partDetails[3], 2)
-        click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost) + ' ISK at ' + market.capitalize())
+        click.echo(
+            f'{single.capitalize()} costs {cost:,.2f} ISK at {market.capitalize()}'
+        )
     else:
         shipName = choose_ship()
         marketName = choose_market()
