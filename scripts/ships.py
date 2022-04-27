@@ -17,6 +17,7 @@ import json
 from eveConsts import (shipList,
                        marketList,
                        capitalPartsList,
+                       shipPartCounts,
                        oreList,
                        partIndex,
                        ptIndex,
@@ -67,26 +68,20 @@ def get_appraisal(itemName, marketName):
     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
     url = 'https://www.evepraisal.com/appraisal/structured.json'
     # new payload for updated evepraisal api
-    payload = '{"market_name":"' + marketName + '","items": [{"name": "' + itemName + '", "quantity": 1}]}'
-    # after this point still needs updating.
-    # see ipython history for details.
+    payload = '{"market_name":"' + marketName + \
+              '","items": [{"name": "' + itemName + '", "quantity": 1}]}'
     req = requests.post(url, headers=headers, data=payload)
-    click.echo(payload)
-    click.echo(req)
+    # click.echo(payload)
+    # click.echo(req)
     json_result = json.loads(req.content)
-    click.echo(type(json_result))
+    # click.echo(type(json_result))
     appraisal = json_result['appraisal']
+
     itemName = appraisal['items'][0]['name']
     currAvg = appraisal['items'][0]['prices']['sell']['avg']
     minPrice = appraisal['items'][0]['prices']['sell']['min']
     maxPrice = appraisal['items'][0]['prices']['sell']['max']
-    click.echo(itemName)
-    click.echo(f'current average for {itemName} at {marketName} is {currAvg:,.2f} ISK.')
-
-
-
-    # appraisal_url = f'https://www.evepraisal.com/a/{appraisal_id}.json' #result = requests.get(appraisal_url).json()
-    # itemName = result['items'][0]['name']
+    # click.echo(itemName)
 
     return [itemName, currAvg, minPrice, maxPrice]
 
@@ -124,26 +119,26 @@ def ship_parts_cost(shipName, marketName):
     # cost = (materials[shipList.index(shipName)][ptIndex][0] == 'oreIndex')
     for ship in shipList:
         if shipName is ship:
-            for x in shipPartsCounts[shipList.index(shipName)][ptIndex][countIndex::]:
-                if shipPartsCounts[shipList.index(shipName)][ptIndex][0] == 'oreIndex':
+            for x in shipPartCounts[shipList.index(shipName)][ptIndex][countIndex::]:
+                if shipPartCounts[shipList.index(shipName)][ptIndex][0] == 'oreIndex':
                     shipParts.append(oreList[int(x)])
                 else:
                     shipParts.append(capitalPartsList[int(x)])
             break
 
     total = 0
-    # partCount = materials[shipList.index(shipName)][partIndex][countIndex::]
-    shipPartCount = dict(zip(shipParts, partCount))
-    for item in shipPartCount:
+    partCount = dict(zip(shipParts, shipPartCounts[shipList.index(shipName)][partIndex][countIndex::]))
+    for item in partCount:
         partDetails = get_appraisal(item, marketName)
-        partCost = partDetails[maxPrice] * float(str(shipPartCount[item]))
+        partCost = partDetails[3] * float(str(partCount[item]))
         partCost = round(partCost, 2)
         total += partCost
-        partMax = 'costs {:,}'.format(round(partDetails[maxPrice], 2))
+        partMax = 'costs {:,}'.format(round(partDetails[3], 2))
         click.echo(f'{item} {partMax}' + 'f ISK at {marketName.capitalize()}')
-        click.echo(f'-{item}x{shipPartCount[item]} costs: ' + '{:,}'.format(partCost) + isk)
+        click.echo(f'-{item}x{partCount[item]} costs: ' + '{:,}'.format(partCost) + isk)
 
     total = round(total, 2)
+    click.echo(partCount)
     click.echo('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
 
 
@@ -177,17 +172,17 @@ def main(single, market, compare):
     elif market and not single:
         market_check(market)
         shipName = choose_ship()
-        get_appraisal(shipName, market)
+        ship_parts_cost(shipName, market)
     elif single and not market:
         item_check(single)
         marketName = choose_market()
         partDetails = get_appraisal(single, marketName)
-        cost = round(partDetails[maxPrice], 2)
+        cost = round(partDetails[3], 2)
         click.echo(single.capitalize() + ' costs + ' + '{:,}'.format(cost) + 'ISK at ' + marketName.capitalize())
     elif single and market:
         check_both(single, market)
         partDetails = get_appraisal(single.lower(), market)
-        cost = round(partDetails[maxPrice], 2)
+        cost = round(partDetails[3], 2)
         click.echo(single.capitalize() + ' costs ' + '{:,}'.format(cost) + ' ISK at ' + market.capitalize())
     else:
         shipName = choose_ship()
