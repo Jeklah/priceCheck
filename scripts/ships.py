@@ -205,8 +205,8 @@ def main(single, market, compare, stats):
     else:
         shipName = choose_ship()
         marketName = choose_market()
-        #get_appraisal(shipName, marketName)
         ship_parts_cost(shipName, marketName)
+
 
 if __name__ == "__main__":
     main()
