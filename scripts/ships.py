@@ -42,6 +42,9 @@ def choose_market():
         click.echo(market_menu)
     mrkt_nums = click.IntRange(0, len(marketList))
     marketChoice = click.prompt('Please Choose a Market: ', type=mrkt_nums)
+    while marketChoice < 0 or marketChoice > 4:
+        click.echo('Please choose a number between 0 and 4.')
+        marketChoice = click.prompt('Please Choose a Market: ', type=mrkt_nums)
     marketName = marketList[int(marketChoice)]
     click.echo(f'You chose {marketName.capitalize()}')
     # time.sleep(1.5)
@@ -122,19 +125,20 @@ def ship_parts_cost(shipName, marketName):
         partCost = round(partCost, 2)
         total += partCost
         partMax = 'costs {:,}'.format(round(partDetails[3], 2))
-        click.echo(f'{item} {partMax}' + 'f ISK at {marketName.capitalize()}')
-        click.echo(f'-{item}x{partCount[item]} costs: ' + '{:,}'.format(partCost) + isk)
+        click.echo(f'{item} {partMax}' + f' ISK at {marketName.capitalize()}')
+        click.echo(f'-{item} x {partCount[item]} costs: ' + '{:,}'.format(partCost) + isk)
 
     total = round(total, 2)
-    click.echo(partCount)
+    # click.echo(partCount)
     click.echo('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
 
 
 @click.command()
 @click.option('--compare', '-c', help='Compare the prices of an item at all trading hubs.', type=str)
 @click.option('--single', '-s', help='Find out price of a single item. Works with any item!', type=str)
-@click.option('--market', '-m', help='The market you would like to use', type=str )
-def main(single, market, compare):
+@click.option('--market', '-m', help='The market you would like to use', type=str)
+@click.option('--stats', '-st', help='Find out statistics for an item at all markets.', type=str)
+def main(single, market, compare, stats):
     """
     A ship cost calulator tool for Eve Online. This will query the chosen market
     for the prices of the cost of the parts or minerals it takes to build your chosen
@@ -159,6 +163,26 @@ def main(single, market, compare):
             click.echo(
                     f'{compare.capitalize()} costs {cost:,.2f} ISK at {mrkt.capitalize()}'
             )
+    elif stats:
+        item_check(stats)
+        for mrkt in marketList:
+            itemDetails = get_appraisal(stats, mrkt)
+            minCost = round(itemDetails[minPrice], 2)
+            avgCost = round(itemDetails[1], 2)
+            maxCost = round(itemDetails[3], 2)
+            click.echo(
+                f'Statistics for {mrkt.capitalize()}: '
+            )
+            click.echo(
+                f'{stats.capitalize()} average cost is {avgCost:,.2f} ISK.'
+                    )
+            click.echo(
+                f'{stats.capitalize()} min price is {minCost:,.2f} ISK.'
+                    )
+            click.echo(
+                f'{stats.capitalize()} max price is {maxCost:,.2f} ISK.\n'
+            )
+
     elif market and not single:
         market_check(market)
         shipName = choose_ship()
@@ -181,8 +205,8 @@ def main(single, market, compare):
     else:
         shipName = choose_ship()
         marketName = choose_market()
-        get_appraisal(shipName, marketName)
-
+        #get_appraisal(shipName, marketName)
+        ship_parts_cost(shipName, marketName)
 
 if __name__ == "__main__":
     main()
