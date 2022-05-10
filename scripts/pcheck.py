@@ -107,7 +107,6 @@ def check_both(single, market):
 
 
 def ship_parts_cost(shipName, marketName):
-    isk = ' ISK' + '\n'
     for ship in shipList:
         if shipName is ship:
             for x in shipPartCounts[shipList.index(shipName)][ptIndex][countIndex::]:
@@ -124,13 +123,13 @@ def ship_parts_cost(shipName, marketName):
         partCost = partDetails[3] * float(str(partCount[item]))
         partCost = round(partCost, 2)
         total += partCost
-        partMax = 'costs {:,}'.format(round(partDetails[3], 2))
+        partMax = f'costs {round(partDetails[3], 2):,}'
         click.echo(f'{item} {partMax}' + f' ISK at {marketName.capitalize()}')
-        click.echo(f'-{item} x {partCount[item]} costs: ' + '{:,}'.format(partCost) + isk)
+        click.echo(f'-{item} x {partCount[item]} costs: {partCost:,} ISK')
 
     total = round(total, 2)
     # click.echo(partCount)
-    click.echo('Total cost of parts = ' + '{:,}'.format(total) + ' ISK')
+    click.echo(f'Total cost of parts = {total:,} ISK')
 
 
 @click.command()
