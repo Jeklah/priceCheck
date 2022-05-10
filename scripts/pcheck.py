@@ -124,7 +124,7 @@ def ship_parts_cost(shipName, marketName):
         partCost = round(partCost, 2)
         total += partCost
         partMax = f'costs {round(partDetails[3], 2):,}'
-        click.echo(f'{item} {partMax}' + f' ISK at {marketName.capitalize()}')
+        click.echo(f'{item} {partMax} ISK at {marketName.capitalize()}')
         click.echo(f'-{item} x {partCount[item]} costs: {partCost:,} ISK')
 
     total = round(total, 2)
