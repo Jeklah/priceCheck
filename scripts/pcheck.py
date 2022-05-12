@@ -8,7 +8,7 @@
 # This tool aims to solve all of that by being easy to use, maintain and
 # easily expandable.
 #
-# Author: Arthur Bowers/Jeklah
+# Author: Jeklah
 # Date: 10/05/2020
 
 import click
