@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Price Check CLI tool for Eve Online
 #
-# This is a tool aimed at helping people estimate the costs of building
+# This was a tool aimed at helping people estimate the costs of building
 # a ship without the use of complicated spreadsheets that seem
 # to break regularly, aren't easy to maintain and hard to use/understand.
 #
