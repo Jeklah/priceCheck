@@ -120,15 +120,23 @@ def ship_parts_cost(shipName, marketName):
             break
 
     total = 0
-    partCount = dict(zip(shipParts, shipPartCounts[shipList.index(shipName)][partIndex][countIndex::]))
+    partCount = dict(
+        zip(shipParts, shipPartCounts[shipList.index(shipName)][partIndex][countIndex::]))
     for item in partCount:
         partDetails = get_appraisal(item, marketName)
         partCost = partDetails[3] * float(str(partCount[item]))
         partCost = round(partCost, 2)
         total += partCost
+<<<<<<< HEAD:scripts/pcheck.py
         partMax = f'costs {round(partDetails[3], 2):,}'
         click.echo(f'{item} {partMax} ISK at {marketName.capitalize()}')
         click.echo(f'-{item} x {partCount[item]} costs: {partCost:,} ISK')
+=======
+        partMax = 'costs {:,}'.format(round(partDetails[3], 2))
+        click.echo(f'{item} {partMax}' + f' ISK at {marketName.capitalize()}')
+        click.echo(
+            f'-{item} x {partCount[item]} costs: ' + '{:,}'.format(partCost) + isk)
+>>>>>>> 1ca5c56 (Code optimising.):scripts/ships.py
 
     total = round(total, 2)
     # click.echo(partCount)
@@ -163,7 +171,7 @@ def main(single, market, compare, stats):
             partDetails = get_appraisal(compare, mrkt)
             cost = round(partDetails[minPrice], 2)
             click.echo(
-                    f'{compare.capitalize()} costs {cost:,.2f} ISK at {mrkt.capitalize()}'
+                f'{compare.capitalize()} costs {cost:,.2f} ISK at {mrkt.capitalize()}'
             )
     elif stats:
         item_check(stats)
@@ -177,10 +185,10 @@ def main(single, market, compare, stats):
             )
             click.echo(
                 f'{stats.capitalize()} average cost is {avgCost:,.2f} ISK.'
-                    )
+            )
             click.echo(
                 f'{stats.capitalize()} min price is {minCost:,.2f} ISK.'
-                    )
+            )
             click.echo(
                 f'{stats.capitalize()} max price is {maxCost:,.2f} ISK.\n'
             )
@@ -197,7 +205,7 @@ def main(single, market, compare, stats):
         click.echo(
             f'{single.capitalize()} costs {cost:,.2f} ISK at {marketName.capitalize()}'
         )
-    elif single and market:
+    elif single:
         check_both(single, market)
         partDetails = get_appraisal(single.lower(), market)
         cost = round(partDetails[3], 2)
