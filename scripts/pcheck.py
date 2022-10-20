@@ -127,16 +127,13 @@ def ship_parts_cost(shipName, marketName):
         partCost = partDetails[3] * float(str(partCount[item]))
         partCost = round(partCost, 2)
         total += partCost
-<<<<<<< HEAD:scripts/pcheck.py
         partMax = f'costs {round(partDetails[3], 2):,}'
         click.echo(f'{item} {partMax} ISK at {marketName.capitalize()}')
         click.echo(f'-{item} x {partCount[item]} costs: {partCost:,} ISK')
-=======
         partMax = 'costs {:,}'.format(round(partDetails[3], 2))
         click.echo(f'{item} {partMax}' + f' ISK at {marketName.capitalize()}')
         click.echo(
-            f'-{item} x {partCount[item]} costs: ' + '{:,}'.format(partCost) + isk)
->>>>>>> 1ca5c56 (Code optimising.):scripts/ships.py
+            f'-{item} x {partCount[item]} costs: ' + '{:,}'.format(partCost) + 'isk')
 
     total = round(total, 2)
     # click.echo(partCount)
