@@ -30,7 +30,12 @@ from eveConsts import (shipList,
 shipParts = []      # Initialising the list.
 
 
-def welcome_msg():
+def welcome_msg() -> str:
+    """
+    Welcome message to be run on first call.
+
+    :return str:
+    """
     # os.system('clear')
     welcome = ' '*13 + 'Hello and Welcome to Jeklah\'s Ship Cost Calculator'
     click.echo((welcome) + '\n')
@@ -39,7 +44,13 @@ def welcome_msg():
     click.echo(disclaim)
 
 
-def choose_market():
+def choose_market() -> str:
+    """
+    Provides menu for the user to pick which
+    market he would like to get prices from.
+
+    :return str:
+    """
     for mrkt in marketList:
         market_menu = f'Ξ {str(marketList.index(mrkt))} {mrkt.capitalize()}\n'
         click.echo(market_menu)
@@ -54,7 +65,14 @@ def choose_market():
     return(marketName)
 
 
-def choose_ship():
+def choose_ship() -> str:
+    """
+    Provides menu for the user to choose which ship
+    (out of the limited selection thats been implemented)
+    to work out the cost of.
+
+    :return str:
+    """
     # os.system('clear')
     click.echo('                              Ship Choice')
     click.echo('                 Please choose which ship you would like')
@@ -69,7 +87,15 @@ def choose_ship():
     return(shipChoice)
 
 
-def get_appraisal(itemName, marketName):
+def get_appraisal(itemName: str, marketName: str) -> list:
+    """
+    This function is how prices are gotten from Eve Online
+
+    :param itemName str:
+    :param marketName str:
+
+    :return list:
+    """
     # new url for update evepraisal api
     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
     url = 'https://www.evepraisal.com/appraisal/structured.json'
@@ -88,7 +114,13 @@ def get_appraisal(itemName, marketName):
     return [itemName, currAvg, minPrice, maxPrice]
 
 
-def item_check(item):
+def item_check(item: str) -> list:
+    """
+    Function to check item exists.
+
+    :param str:
+    :return list:
+    """
     try:
         get_appraisal(item, 'jita')
     except KeyError:
@@ -96,7 +128,13 @@ def item_check(item):
         exit()
 
 
-def market_check(market):
+def market_check(market: str) -> list:
+    """
+    Function to check that the market exists.
+
+    :param str:
+    :return list:
+    """
     try:
         get_appraisal('Tritanium', market)
     except KeyError:
@@ -104,12 +142,24 @@ def market_check(market):
         exit()
 
 
-def check_both(single, market):
+def check_both(single: str, market: str) -> None:
+    """
+    Function to check both that item and market
+    exist.
+    """
     item_check(single)
     market_check(market)
 
 
-def ship_parts_cost(shipName, marketName):
+def ship_parts_cost(shipName: str, marketName: str) -> str:
+    """
+    This function collates the parts needed for the ship
+    it will then find the price of parts and add them up
+
+    :param str:
+    :param str:
+    :return str:
+    """
     for ship in shipList:
         if shipName is ship:
             for x in shipPartCounts[shipList.index(shipName)][ptIndex][countIndex::]:
