@@ -34,8 +34,6 @@ ship_parts = []      # Initialising the list.
 def welcome_msg() -> None:
     """
     Welcome message to be run on first call.
-
-    :return str:
     """
     # os.system('clear')
     welcome = ' ' * 13 + 'Hello and Welcome to Jeklah\'s Ship Cost Calculator'
