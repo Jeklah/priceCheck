@@ -4,7 +4,7 @@
 # Author: Jeklah
 # Date: 10/05/2020
 
-part_index = 1     # Index for the indicator value of partindex in ship_part_counts
+pt_index = 1     # Index for the indicator value of partindex in ship_part_counts
 count_index = 1  # Index for the indicator value of countindex in ship_part_counts
 ship_index = 0   # Index for the name of the ship in ship_part_counts
 part_index = 2   # Index for when part_index is 2 in ship_part_counts.
