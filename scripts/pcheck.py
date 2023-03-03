@@ -199,7 +199,7 @@ def ship_parts_cost(ship_name: str, market_name: str) -> str:
 @click.option('--single', '-s', help='Find out price of a single item. Works with any item!', type=str)
 @click.option('--market', '-m', help='The market you would like to use', type=str)
 @click.option('--stats', '-st', help='Find out statistics for an item at all markets.', type=str)
-def main(single, market, compare, stats):
+def main(single: str, market: str, compare: str, stats: str) -> None:
     """
     A ship cost calulator tool for Eve Online. This will query the chosen market
     for the prices of the cost of the parts or minerals it takes to build your chosen
